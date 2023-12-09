@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "didacticfire": {
+      "hosting": {
+        "app": [
+          "didacticfire"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "didacticfire"
+  }
+}
