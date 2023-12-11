@@ -18,6 +18,11 @@ export class AvatarService {
     return docData(userDocRef);
 
   }
+   getUserInfo(){
+    const user = this.auth.currentUser;
+    const userRef = doc(this.firestore,`users/${user?.uid}`);
+    return docData(userRef);
+  }
   async uploadImage(photo: Photo){
     const user = this.auth.currentUser;
     const path = `uploads/${user?.uid}/profile.png`;
@@ -32,4 +37,5 @@ export class AvatarService {
       return null;
     }
   }
+  
 }

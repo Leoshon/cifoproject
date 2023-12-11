@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="logOut()">
+        <ion-icon name="log-out"></ion-icon>
+        Log out
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{titulo | uppercase}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="d-flex-center">
+    <div class="preview">
+      <ion-avatar (click)="changeImage()">
+        <img
+          *ngIf="profile?.imageUrl; else placeholder_avatar;"
+          [src]="profile.imageUrl"
+        />
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+            <p>Select avatar</p>
+          </div>
+        </ng-template>
+      </ion-avatar>
+    </div>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="addUpdateEvent()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-content>

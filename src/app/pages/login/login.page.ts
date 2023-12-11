@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,9 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginPage implements OnInit {
   credentials!: FormGroup;
+  isPassword!: boolean;
+  hide:boolean=true;
+  type!:string;
 
   constructor(
     private fb: FormBuilder,
@@ -31,11 +35,13 @@ export class LoginPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+    this.type= 'password';
   }
   async login() {
     const loading = await this.loadingControler.create();
     await loading.present();
-    const user = await this.authservice.login(this.credentials.value);
+    const user = await this.authservice.login(this.credentials.value as User);
+    console.log(user?.user);
     await loading.dismiss();
     if (user) {
       this.router.navigateByUrl('/home', { replaceUrl: true });
@@ -47,7 +53,7 @@ export class LoginPage implements OnInit {
   async register() {
     const loading = await this.loadingControler.create();
     await loading.present();
-    const user = await this.authservice.register(this.credentials.value);
+    const user = await this.authservice.register(this.credentials.value as User);
     await loading.dismiss();
     if (user) {
       this.router.navigateByUrl('/home', { replaceUrl: true });
@@ -64,4 +70,12 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
+  togglePassword(){
+    this.hide=!this.hide;
+    if(this.hide){
+      this.type="password";
+  }else{
+    this.type="text";
+  }
+}
 }
