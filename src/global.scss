@@ -60,7 +60,7 @@ ion-button {
 .d-flex-center {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 
@@ -95,7 +95,7 @@ ion-button {
     padding: 20px;
 }
 
-.product-item {
+.event-item {
     --padding-top: 20px;
 
     ion-avatar {

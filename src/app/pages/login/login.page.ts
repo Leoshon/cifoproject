@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
     }
   
   }
-  async register() {
+/*   async register() {
     const loading = await this.loadingControler.create();
     await loading.present();
     const user = await this.authservice.register(this.credentials.value as User);
@@ -61,7 +61,7 @@ export class LoginPage implements OnInit {
       this.showAlert('Registration Failed', 'Please try again');
     }
     
-  }
+  } */
   async showAlert(message: string, header: string) {
     const alert = await this.alertController.create({
       header,
