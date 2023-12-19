@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
+import { Auth, } from '@angular/fire/auth';
+import { User } from '../models/user.model';
 import {
   Firestore,
   collectionData,
@@ -10,26 +11,31 @@ import { Storage, ref } from '@angular/fire/storage';
 import { Photo } from '@capacitor/camera';
 import { addDoc, collection, query, setDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, uploadString } from 'firebase/storage';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FireService {
+export class FireBaseService {
   constructor(
     private auth: Auth,
     private firestore: Firestore,
-    private storage: Storage
+    private storage: Storage,
+    private utilService: UtilsService
   ) {}
-  /* getUserProfile() {
+   getUserProfile() {
     const user = this.auth.currentUser;
-    const userDocRef = doc(this.firestore, `userDocRef/${user?.uid}`);
+    const userDocRef = doc(this.firestore, `users/${user?.uid}`);
+    console.log(user)
     return docData(userDocRef);
-  } */
-  getUserInfo() {
-    const user = this.auth.currentUser;
-    const userRef = doc(this.firestore, `users/${user?.uid}`);
+  } 
+  getUserInfo(usuario: User) {
+    //const user = this.auth.currentUser;
+    const userRef = doc(this.firestore, `users/${usuario?.uid}`);
+    console.log(userRef);
     return docData(userRef);
   }
+ 
   async uploadImage(photo: Photo) {
     const user = this.auth.currentUser;
     const path = `${user?.uid}/profile.png`;
@@ -38,8 +44,10 @@ export class FireService {
       //await uploadString(storageRef, photo.base64String!, 'base64');
       await uploadString(storageRef, photo.dataUrl!, 'data_url');
       const imageUrl = await getDownloadURL(storageRef);
+      const usuario = this.utilService.getFromLocalStorage('user');
+      usuario.imageUrl = imageUrl;
       const userDocRef = doc(this.firestore, `users/${user?.uid}`);
-      await setDoc(userDocRef, { imageUrl });
+      await setDoc(userDocRef, usuario);
       return true;
     } catch (error) {
       return null;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { FireService } from '../../services/firebase.service';
+import { FireBaseService } from '../../services/firebase.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { User } from '../../models/user.model';
@@ -23,25 +23,33 @@ export class HomePage  {
     private utilsServ: UtilsService,
     private authService: AuthService,
     private routh: Router,
-    private avatarService: FireService,
+    private firebaseServ: FireBaseService,
     private loadingContr: LoadingController,
     private alertContr: AlertController
   ) {
- /*    this.avatarService.getUserProfile().subscribe((profile) => {
-      this.profile = profile;
-    }); */
-   this.avatarService.getUserInfo().subscribe((user) => {
+
+  /*  this.firebaseServ.getUserInfo(this.user()).subscribe((user) => {
       this.usuario = user as User;
+      console.log(this.usuario);
       
-  }); 
+      
+  });  */
    
   }
 
   user():User{
+    console.log(this.utilsServ.getFromLocalStorage('user').uid);
     return  this.utilsServ.getFromLocalStorage('user');
   }
   ionViewWillEnter() {
-    this.getEvents();
+    this.firebaseServ.getUserProfile().subscribe((profile) => {
+      //console.log(profile);
+      this.usuario = profile as User;
+      console.log(this.usuario);
+      this.utilsServ.saveInLocalStorage('user', this.usuario);
+      this.getEvents();
+    }); 
+    
   }
   async logOut() {
     await this.authService.logout();
@@ -61,7 +69,7 @@ export class HomePage  {
     if (image) {
       const loading = await this.loadingContr.create();
       await loading.present();
-      const result = await this.avatarService.uploadImage(image);
+      const result = await this.firebaseServ.uploadImage(image);
       await loading.dismiss();
       if (!result) {
         const alert = await this.alertContr.create({
@@ -86,8 +94,9 @@ export class HomePage  {
 
   }
   getEvents() {
+   console.log(this.user().uid);
     let path = `users/${this.user().uid}/events`;
-    let sub = this.avatarService.getEvents(path).subscribe({
+    let sub = this.firebaseServ.getEvents(path).subscribe({
       next: (events: any) => {
         this.events = events;
         console.log(this.events);

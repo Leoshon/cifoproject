@@ -15,15 +15,15 @@ import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
 export class AuthService {
   [x: string]: any;
   constructor(private auth: Auth) {}
-  async login(usuario: User) {
+  async login(usuario: any) {
     try {
-      const user = await signInWithEmailAndPassword(
+      usuario = await signInWithEmailAndPassword(
         this.auth,
         usuario.email,
         usuario.password
       );
 
-      return user;
+      return usuario;
     } catch (error) {
       console.log(error);
       return null;
@@ -34,7 +34,9 @@ export class AuthService {
       const user = await createUserWithEmailAndPassword(
         this.auth,
         usuario.email,
-        usuario.password
+        usuario.password,
+    
+
       );
       return user;
     } catch (error) {

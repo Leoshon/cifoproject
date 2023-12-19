@@ -49,7 +49,7 @@ export class SignupPage implements OnInit {
     const user = await this.authservice
       .register(this.credentials.value as User)
       .then(async (res) => {
-        /* await this.authservice.updateUser(this.credentials.value as User); */
+      await this.authservice.updateUser(this.credentials.value as User);
         console.log(res?.user?.uid);
         this.credentials.value.uid = res?.user?.uid;
         await this.setUserInfo(this.credentials.value.uid as string);
@@ -65,12 +65,15 @@ export class SignupPage implements OnInit {
   async setUserInfo(uid: string) {
     const loading = await this.loadingControler.create();
     await loading.present();
-    const user = await this.authservice.setDocument(`users/${uid}`, {
+    await this.authservice.setDocument(`users/${uid}`, {
       nombre: this.credentials.value.nombre,
       email: this.credentials.value.email,
       uid: uid,
+
     });
-    this.utilsService.saveInLocalStorage('user', this.credentials.value);
+    console.log(this.credentials.value);
+    this.utilsService.saveInLocalStorage('user',this.credentials.value);
+    
     await loading.dismiss();
   }
   async getUserInfo(uid: string) {
@@ -78,7 +81,10 @@ export class SignupPage implements OnInit {
     await loading.present();
     const user = await this.authservice
       .getDocument(`users/${uid}`)
-      .then((res) => {});
+      .then((res) => {
+        console.log(res);
+        
+      });
     await loading.dismiss();
   }
   async showAlert(message: string, header: string) {

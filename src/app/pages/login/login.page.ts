@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +16,15 @@ export class LoginPage implements OnInit {
   isPassword!: boolean;
   hide:boolean=true;
   type!:string;
+ 
 
   constructor(
     private fb: FormBuilder,
     private loadingControler: LoadingController,
     private alertController: AlertController,
     private authservice: AuthService,
-    private router: Router
+    private router: Router,
+    private utilsService: UtilsService
   ) {}
   get email() {
     return this.credentials.get('email');
@@ -40,10 +43,16 @@ export class LoginPage implements OnInit {
   async login() {
     const loading = await this.loadingControler.create();
     await loading.present();
-    const user = await this.authservice.login(this.credentials.value as User);
-    console.log(user?.user);
+    const usuario= await this.authservice.login(this.credentials.value as User).then(async (res) => {
+    
+     console.log(res?.user?.uid);
+      return res.user.uid; // Add this line to return the result
+    });
+
     await loading.dismiss();
-    if (user) {
+    if (usuario) {
+      let data=this.utilsService.getFromLocalStorage('user');
+      console.log(data);
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } else {
       this.showAlert('Login Failed', 'Please check your credentials');

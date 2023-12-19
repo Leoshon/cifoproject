@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FireService } from 'src/app/services/firebase.service';
+import { FireBaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { User } from 'src/app/models/user.model';
 import { LoadingController, AlertController } from '@ionic/angular';
@@ -13,7 +13,7 @@ import { Events } from 'src/app/models/event.model';
 })
 export class AddUpdateEventComponent implements OnInit {
   utlisServ = inject(UtilsService);
-  avatServ = inject(FireService);
+  fireServ = inject(FireBaseService);
   loadCtrl = inject(LoadingController);
   alertCtrl = inject(AlertController);
   eventForm!: FormGroup;
@@ -22,7 +22,6 @@ export class AddUpdateEventComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private avatarServ: FireService,
     private utilsServ: UtilsService
   ) {}
   get categoria() {
@@ -78,13 +77,13 @@ export class AddUpdateEventComponent implements OnInit {
     try {
       let dataUrl = this.eventForm.get('image')?.value;
       const imagePath = `${this.usuario.uid}/${Date.now()}`;
-      const imageUrl = await this.avatarServ.uploadEventImage(
+      const imageUrl = await this.fireServ.uploadEventImage(
         imagePath,
         dataUrl
       );
       this.eventForm.get('image')?.setValue(imageUrl);
       delete this.eventForm.value.id;
-      await this.avatarServ
+      await this.fireServ
         .addDocument(path, this.eventForm.value)
         .then(async () => {
           await this.showAlert('Evento agregado');
@@ -102,17 +101,17 @@ export class AddUpdateEventComponent implements OnInit {
     try {
       if (this.eventForm.get('image')?.value !== this.evento?.image) {
         let dataUrl = this.eventForm.get('image')?.value;
-        const imagePath = await this.avatarServ.getImgFilePath(
+        const imagePath = await this.fireServ.getImgFilePath(
           this.evento?.image || ''
         );
-        const imageUrl = await this.avatarServ.uploadEventImage(
+        const imageUrl = await this.fireServ.uploadEventImage(
           imagePath,
           dataUrl
         );
         this.eventForm.get('image')?.setValue(imageUrl);
       }
       delete this.eventForm.value.id;
-      await this.avatarServ
+      await this.fireServ
         .updateEvent(path, this.eventForm.value)
         .then(async () => {
           await this.showAlert('Evento modfifcado');
