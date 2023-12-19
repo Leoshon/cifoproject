@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title><strong>Register</strong></ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        routerLink="/"
+        defaultHref="backButton"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="custom-input main">
+  <div class="d-flex-center">
+    <form [formGroup]="credentials" (ngSubmit)="signUp()" class="auth-form">
+      <ion-item class="ion-margin-bottom">
+        <ion-icon slot="start" name="mail-outline"></ion-icon>
+        <ion-input
+          type="email"
+          formControlName="email"
+          label="Correo"
+          label-placement="floating"
+          autocomplete="autocomplete"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="(email?.dirty || email?.touched) && email?.errors"
+          >Email is incorrect</ion-note
+        >
+      </ion-item>
+      <ion-item class="ion-margin-bottom">
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-input
+          type="text"
+          formControlName="nombre"
+          label="Nombre"
+          label-placement="floating"
+          autocomplete="autocomplete"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="(nombre?.dirty || nombre?.touched) && nombre?.errors"
+          >Name required, min 3 characters</ion-note
+        >
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+        <ion-input
+          [type]="type"
+          formControlName="password"
+          label="password"
+          label-placement="floating"
+        ></ion-input>
+        <ion-button
+          (click)="togglePassword()"
+          slot="end"
+          fill="clear"
+          shape="round"
+        >
+          <ion-icon [name]="hide ? 'eye-outline': 'eye-off-outline'"></ion-icon>
+        </ion-button>
+        <ion-note
+          slot="error"
+          *ngIf="(password?.dirty || password?.touched) && password?.errors"
+          >Password is incorrect</ion-note
+        >
+      </ion-item>
+      <ion-button
+        type="submit"
+        expand="full"
+        class="submit"
+        [disabled]="!credentials.valid"
+        >Login
+        <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

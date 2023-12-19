@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close-circle-outline" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Add Events</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="eventForm" class="ion-padding ion-text-center" (submit)="submitEvent()">
+    <ion-avatar *ngIf="eventForm.value.image" class="ion-margin-bottom">
+      <img [src]="eventForm.value.image" />
+    </ion-avatar>
+    <ion-icon *ngIf="!eventForm.value.image" name="image-outline" class="image-icon"></ion-icon>
+    <ion-button (click)="takePhoto()" expand="block" fill="clear" shape="round">
+      Click me
+    </ion-button>
+
+    <ion-item class="ion-margin-bottom">
+      <ion-input
+        type="text"
+        formControlName="categoria"
+        label="Categoria"
+        label-placement="floating"
+        autocomplete="autocomplete"
+      ></ion-input>
+      <ion-note
+        slot="error"
+        *ngIf="(categoria?.dirty || categoria?.touched) && categoria?.errors"
+        >Name required, min 3 characters</ion-note
+      >
+    </ion-item>
+    <ion-item class="ion-margin-bottom">
+      <ion-textarea
+        type="text"
+        formControlName="descripcion"
+        label="Descripcion"
+        label-placement="floating"
+      ></ion-textarea>
+      <ion-note
+        slot="error"
+        *ngIf="
+          (descripcion?.dirty || descripcion?.touched) && descripcion?.errors
+        "
+        >Name required, min 3 characters</ion-note
+      >
+    </ion-item>
+    <ion-item class="ion-margin-bottom">
+      <ion-input
+        type="number"
+        formControlName="precio"
+        label="Precio"
+        label-placement="floating"
+      ></ion-input>
+    </ion-item>
+    <ion-item class="ion-margin-bottom">
+      <ion-input
+        type="text"
+        formControlName="pais"
+        label="País"
+        label-placement="floating"
+      ></ion-input>
+    </ion-item>
+    <ion-button type="submit"  mode="ios" class="ion-margin">
+      Add
+      <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-button>
+  </form>
+</ion-content>
