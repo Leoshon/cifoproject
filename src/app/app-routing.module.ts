@@ -27,7 +27,11 @@ const routes: Routes = [
     path:'**',
     redirectTo:'',
     pathMatch:'full'
+  },  {
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
   },
+
  
  
 ];

@@ -1,12 +1,18 @@
-<ion-header class="ion-no-border">
+<!-- <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-title><strong>My App</strong></ion-title>
   </ion-toolbar>
-</ion-header>
-  <ion-content>
-    <div class="d-flex-center">
-      <form [formGroup]="credentials" (ngSubmit)="login()" class="auth-form ion-margin-top">
-        <ion-item class="ion-margin-bottom">
+</ion-header> -->
+<app-header title="login"></app-header>
+<ion-content>
+  <div class="d-flex-center">
+    <form
+      [formGroup]="credentials"
+      (ngSubmit)="login()"
+      (keypress.enter)="login()"
+      class="auth-form "
+    >
+      <!--      <ion-item class="ion-margin-bottom">
           <ion-icon slot="start" name="mail-outline"></ion-icon>
           <ion-input
             type="email"
@@ -44,19 +50,60 @@
             *ngIf="(password?.dirty || password?.touched) && password?.errors"
             >Password is incorrect</ion-note
           >
-        </ion-item>
-        <ion-button type="submit" expand="full" class="submit" [disabled]="!credentials.valid"
-          >Login
-          <ion-icon slot="end" name="log-in-outline"></ion-icon>
-          </ion-button
-        >
-        <ion-button type="button" expand="full"
-          class="ion-margin-top" routerLink="signup">Register
-          <ion-icon slot="end" name="person-add-outline" ></ion-icon>
-          </ion-button
-        >
-
-      </form>
-    </div>
-  </ion-content>
-
+        </ion-item> -->
+      <app-custom-input
+        icon="mail-outline"
+        type="email"
+        [controlName]="credentials.controls.email"
+        label="Correo"
+        autocomplete="autocomplete"
+      ></app-custom-input>
+      <div
+        class="validators"
+        *ngIf="credentials.controls.email.errors && credentials.controls.email.touched"
+      >
+        <div *ngIf="credentials.controls.email.errors?.['required']">
+          Campo obligatorio
+        </div>
+        <div *ngIf="credentials.controls.email.errors?.['email']">
+          Formato incorrecto
+        </div>
+      </div>
+      <app-custom-input
+        icon="lock-closed-outline"
+        type="password"
+        [controlName]="credentials.controls.password"
+        label="Password"
+      ></app-custom-input>
+      <div
+        class="validators"
+        *ngIf="credentials.controls.password.errors && credentials.controls.password.touched"
+      >
+        <div *ngIf="credentials.controls.password.errors?.['required']">
+          Campo obligatorio
+        </div>
+        <div *ngIf="credentials.controls.password.errors?.['minlength']">
+          La contrseña debe tener al menos 6 caracteres
+        </div>
+      </div>
+      <ion-button
+        type="submit"
+        expand="block"
+        class="submit"
+        [disabled]="!credentials.valid"
+        mode="ios"
+        >Login
+        <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        type="button"
+        expand="block"
+        class="ion-margin-top"
+        routerLink="signup"
+        mode="ios"
+        >Register
+        <ion-icon slot="end" name="person-add-outline"></ion-icon>
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

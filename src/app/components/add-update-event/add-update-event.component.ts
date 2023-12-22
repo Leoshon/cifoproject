@@ -42,10 +42,10 @@ export class AddUpdateEventComponent implements OnInit {
   async ngOnInit() {
     this.eventForm = this.fb.group({
       id: [''],
-      categoria: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
-      precio: [null, [Validators.required]],
-      pais: ['', [Validators.required]],
+      categoria: ['', [Validators.required, Validators.minLength(3)]],
+      descripcion: ['', [Validators.required, Validators.minLength(3)]],
+      precio: [null, [Validators.required, Validators.min(0)]],
+      pais: ['', [Validators.required, Validators.minLength(2)]],
       image: ['', [Validators.required]],
     });
     this.usuario = this.utilsServ.getFromLocalStorage('user');
@@ -86,7 +86,7 @@ export class AddUpdateEventComponent implements OnInit {
       await this.fireServ
         .addDocument(path, this.eventForm.value)
         .then(async () => {
-          await this.showAlert('Evento agregado');
+          await this.utlisServ.showAlert('Evento agregado', '');
         });
       this.utlisServ.dismisModal({ success: true});
       await loading.dismiss();
@@ -114,7 +114,7 @@ export class AddUpdateEventComponent implements OnInit {
       await this.fireServ
         .updateEvent(path, this.eventForm.value)
         .then(async () => {
-          await this.showAlert('Evento modfifcado');
+          await this.utlisServ.showAlert('Evento modfifcado', '');
         });
       this.utlisServ.dismisModal({ success: true});
       await loading.dismiss();
@@ -122,13 +122,13 @@ export class AddUpdateEventComponent implements OnInit {
       console.log(error);
     }
   }
-  async showAlert(message: string) {
+/*   async showAlert(message: string) {
     const alert = await this.alertCtrl.create({
       header: '',
       message,
       buttons: ['OK'],
     });
     await alert.present();
-  }
+  } */
 }
 //await addDoc(collection(this.firestore,`users/${user?.uid}/events`), {imageUrl});

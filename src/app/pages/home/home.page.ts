@@ -14,11 +14,12 @@ import { Events } from 'src/app/models/event.model';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage  {
+export class HomePage {
   profile = null as any;
   usuario!: User;
   titulo: string = '';
   events: Events[] = [];
+  loading : boolean = false;
   constructor(
     private utilsServ: UtilsService,
     private authService: AuthService,
@@ -27,19 +28,23 @@ export class HomePage  {
     private loadingContr: LoadingController,
     private alertContr: AlertController
   ) {
-
-  /*  this.firebaseServ.getUserInfo(this.user()).subscribe((user) => {
+    /*  this.firebaseServ.getUserInfo(this.user()).subscribe((user) => {
       this.usuario = user as User;
       console.log(this.usuario);
       
       
   });  */
-   
   }
-
-  user():User{
+  doRefresh(event: any) {
+    this.getEvents();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
+  
+  user(): User {
     console.log(this.utilsServ.getFromLocalStorage('user').uid);
-    return  this.utilsServ.getFromLocalStorage('user');
+    return this.utilsServ.getFromLocalStorage('user');
   }
   ionViewWillEnter() {
     this.firebaseServ.getUserProfile().subscribe((profile) => {
@@ -48,15 +53,14 @@ export class HomePage  {
       console.log(this.usuario);
       this.utilsServ.saveInLocalStorage('user', this.usuario);
       this.getEvents();
-    }); 
-    
+    });
   }
   async logOut() {
     await this.authService.logout();
     this.routh.navigateByUrl('', { replaceUrl: true });
   }
   async changeImage() {
-    const image = await Camera.getPhoto({
+    const image = /* await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.DataUrl,
@@ -64,7 +68,7 @@ export class HomePage  {
       promptLabelHeader: 'Seleccionar foto',
       promptLabelPhoto: 'Seleccionar foto',
       promptLabelPicture: 'Tomar foto',
-    });
+    }); */ await this.utilsServ.changeImage();
     console.log(image);
     if (image) {
       const loading = await this.loadingContr.create();
@@ -72,34 +76,75 @@ export class HomePage  {
       const result = await this.firebaseServ.uploadImage(image);
       await loading.dismiss();
       if (!result) {
-        const alert = await this.alertContr.create({
+      /*   const alert = await this.alertContr.create({
           header: 'Error',
           message: 'Error updating profile picture',
           buttons: ['OK'],
         });
-        await alert.present();
+        await alert.present(); */
+        await this.utilsServ.showAlert('Error', 'Error updating profile picture');
       }
     }
   }
   async addUpdateEvent(evento?: Events) {
-  let success = await this.utilsServ.presentModal({
+    let success = await this.utilsServ.presentModal({
       component: AddUpdateEventComponent,
       componentProps: {
-        evento : evento,
+        evento: evento,
       },
     });
     if (success) {
       this.getEvents();
     }
+  }
+  async deleteEvent(evento: Events) {
+    let path = `users/${this.user().uid}/events/${evento.id}`;
+    const loading = await this.utilsServ.loading();
+    await loading.present();
+
+    try {
+      let  imagePath = await this.firebaseServ.getImgFilePath(evento.image);
+      await this.firebaseServ.deleteFile(imagePath);
+      await this.firebaseServ.deleteEvent(path, evento).then(async () => {
+      await this.utilsServ.showAlert('Evento eliminado', '');
+      });
+      await loading.dismiss();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.getEvents();
+    }
+  }
+  async confirmDelete(evento: Events) {
+    await this.utilsServ.presentAlert({
+      header: 'Confirmar',
+      message: '¿Desea eliminar el evento?',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+      
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            this.deleteEvent(evento);
+          },
+        },
+      ],
+    });
 
   }
   getEvents() {
-   console.log(this.user().uid);
+    console.log(this.user().uid);
     let path = `users/${this.user().uid}/events`;
+    this.loading = true;
     let sub = this.firebaseServ.getEvents(path).subscribe({
       next: (events: any) => {
         this.events = events;
         console.log(this.events);
+        this.loading = false;
         sub.unsubscribe();
       },
     });

@@ -5,7 +5,7 @@
         <ion-icon name="close-circle-outline" ></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Add Events</ion-title>
+    <ion-title class="ion-text-center">{{evento ? 'Update' : 'Add'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -29,8 +29,8 @@
       <ion-note
         slot="error"
         *ngIf="(categoria?.dirty || categoria?.touched) && categoria?.errors"
-        >Name required, min 3 characters</ion-note
-      >
+        >Name required, min 3 characters</ion-note>
+      
     </ion-item>
     <ion-item class="ion-margin-bottom">
       <ion-textarea
@@ -63,8 +63,8 @@
         label-placement="floating"
       ></ion-input>
     </ion-item>
-    <ion-button type="submit"  mode="ios" class="ion-margin">
-      Add
+    <ion-button type="submit"  mode="ios" class="ion-margin" [disabled]="eventForm.invalid">
+      {{evento ? 'Update' : 'Add'}}
       <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
     </ion-button>
   </form>

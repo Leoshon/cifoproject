@@ -9,8 +9,8 @@ import {
 } from '@angular/fire/firestore';
 import { Storage, ref } from '@angular/fire/storage';
 import { Photo } from '@capacitor/camera';
-import { addDoc, collection, query, setDoc, updateDoc } from 'firebase/firestore';
-import { getDownloadURL, uploadString } from 'firebase/storage';
+import { addDoc, collection, deleteDoc, query, setDoc, updateDoc } from 'firebase/firestore';
+import { getDownloadURL, uploadString, deleteObject } from 'firebase/storage';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -79,5 +79,11 @@ export class FireBaseService {
   }
   updateEvent(path: string, data: any) {
     return updateDoc(doc(this.firestore, path), data);
+  }
+  deleteEvent(path: string, data: any) {
+    return deleteDoc(doc(this.firestore, path));
+  }
+  deleteFile(path: string) {
+    return deleteObject(ref(this.storage, path));
   }
 }

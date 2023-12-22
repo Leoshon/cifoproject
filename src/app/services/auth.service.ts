@@ -15,8 +15,8 @@ import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
 export class AuthService {
   [x: string]: any;
   constructor(private auth: Auth) {}
-  async login(usuario: any) {
-    try {
+  async login(usuario: User) {
+ /*    try {
       usuario = await signInWithEmailAndPassword(
         this.auth,
         usuario.email,
@@ -27,10 +27,16 @@ export class AuthService {
     } catch (error) {
       console.log(error);
       return null;
-    }
+    } */
+    return await signInWithEmailAndPassword(
+      this.auth,
+      usuario.email,
+      usuario.password
+    );
+
   }
   async register(usuario: User) {
-    try {
+    /* try {
       const user = await createUserWithEmailAndPassword(
         this.auth,
         usuario.email,
@@ -42,13 +48,21 @@ export class AuthService {
     } catch (error) {
       console.log(error);
       return null;
-    }
+    } */
+    return await createUserWithEmailAndPassword(
+      this.auth,
+      usuario.email,
+      usuario.password
+    );
   }
   async updateUser(usuario: User) {
-    const user = await updateProfile(this.auth.currentUser!, {
+  /*   const user = await updateProfile(this.auth.currentUser!, {
       displayName: usuario.nombre,
     });
-    return user;
+    return user; */
+    return await updateProfile(this.auth.currentUser!, {
+      displayName: usuario.nombre,
+    });
   }
   setDocument(path: string, data: any) {
     return setDoc(doc(getFirestore(), path), data);

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormGroup, Validators,FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { UtilsService } from 'src/app/services/utils.service';
+
 
 @Component({
   selector: 'app-login',
@@ -12,16 +12,16 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  credentials!: FormGroup;
-  isPassword!: boolean;
+  //credentials!: FormGroup;
+  /* isPassword!: boolean;
   hide:boolean=true;
-  type!:string;
- 
+  type!:string; */
+ credentials= new FormGroup({
+    email: new FormControl('',[Validators.required,Validators.email]),
+    password: new FormControl('',[Validators.required,Validators.minLength(6)]),
+ });
 
   constructor(
-    private fb: FormBuilder,
-    private loadingControler: LoadingController,
-    private alertController: AlertController,
     private authservice: AuthService,
     private router: Router,
     private utilsService: UtilsService
@@ -34,29 +34,43 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.credentials = this.fb.group({
+  /*   this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-    this.type= 'password';
+    }); */
+  /*   this.credentials = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    }); */
+    //this.type= 'password';
   }
   async login() {
-    const loading = await this.loadingControler.create();
+    const loading = await this.utilsService.loading();
     await loading.present();
     const usuario= await this.authservice.login(this.credentials.value as User).then(async (res) => {
     
-     console.log(res?.user?.uid);
-      return res.user.uid; // Add this line to return the result
+      console.log(res);
+      return res; 
+    
+    }).catch((error) => {
+      console.log(error);
+      this.utilsService.presentToast({
+        message: error.message,
+        duration: 3000,
+        color: 'primary',
+        icon: 'alert-circle-outline',
+        position: 'top'
+      })
+    }).finally(() => {
+      loading.dismiss();
+
     });
 
-    await loading.dismiss();
-    if (usuario) {
+    if (usuario!=null) {
       let data=this.utilsService.getFromLocalStorage('user');
       console.log(data);
       this.router.navigateByUrl('/home', { replaceUrl: true });
-    } else {
-      this.showAlert('Login Failed', 'Please check your credentials');
-    }
+    } 
   
   }
 /*   async register() {
@@ -71,20 +85,20 @@ export class LoginPage implements OnInit {
     }
     
   } */
-  async showAlert(message: string, header: string) {
+/*   async showAlert(message: string, header: string) {
     const alert = await this.alertController.create({
       header,
       message,
       buttons: ['OK'],
     });
     await alert.present();
-  }
-  togglePassword(){
+  } */
+ /*  togglePassword(){
     this.hide=!this.hide;
     if(this.hide){
       this.type="password";
   }else{
     this.type="text";
-  }
+  } */
 }
-}
+

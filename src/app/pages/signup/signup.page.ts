@@ -54,10 +54,10 @@ export class SignupPage implements OnInit {
         this.credentials.value.uid = res?.user?.uid;
         await this.setUserInfo(this.credentials.value.uid as string);
        // await this.getUserInfo(this.credentials.value.uid as string);
-        this.showAlert('Bienvenido', `${this.credentials.value.nombre}`);
+        this.utilsService.showAlert('Bienvenido', `${this.credentials.value.nombre}`);
       })
       .catch((err) => {
-        this.showAlert('Registration Failed', 'Please try again');
+        this.utilsService.showAlert('Registration Failed', 'Please try again');
       });
     await loading.dismiss();
     this.router.navigateByUrl('/', { replaceUrl: true });
@@ -87,14 +87,14 @@ export class SignupPage implements OnInit {
       });
     await loading.dismiss();
   }
-  async showAlert(message: string, header: string) {
+/*   async showAlert(message: string, header: string) {
     const alert = await this.alertController.create({
       header,
       message,
       buttons: ['OK'],
     });
     await alert.present();
-  }
+  } */
   togglePassword() {
     this.hide = !this.hide;
     if (this.hide) {
