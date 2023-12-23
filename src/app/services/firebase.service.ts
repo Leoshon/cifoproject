@@ -29,12 +29,6 @@ export class FireBaseService {
     console.log(user)
     return docData(userDocRef);
   } 
-  getUserInfo(usuario: User) {
-    //const user = this.auth.currentUser;
-    const userRef = doc(this.firestore, `users/${usuario?.uid}`);
-    console.log(userRef);
-    return docData(userRef);
-  }
  
   async uploadImage(photo: Photo) {
     const user = this.auth.currentUser;

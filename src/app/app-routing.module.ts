@@ -13,9 +13,14 @@ const routes: Routes = [
     ...canActivate(redirectLoggedInToHome)
 
   },
-  {
+/*   {
     path: 'home',
     loadChildren: () => import('./pages/main/home/home.module').then( m => m.HomePageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  }, */
+  {
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
@@ -28,10 +33,7 @@ const routes: Routes = [
     redirectTo:'',
     pathMatch:'full'
   },
-  {
-    path: 'main',
-    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
-  },
+ 
 
  
  

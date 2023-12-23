@@ -13,8 +13,9 @@ import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
   providedIn: 'root',
 })
 export class AuthService {
-  [x: string]: any;
+
   constructor(private auth: Auth) {}
+
   async login(usuario: User) {
     return await signInWithEmailAndPassword(
       this.auth,
@@ -23,6 +24,7 @@ export class AuthService {
     );
 
   }
+
   async register(usuario: User) {
     return await createUserWithEmailAndPassword(
       this.auth,
@@ -30,11 +32,13 @@ export class AuthService {
       usuario.password
     );
   }
+
   async updateUser(usuario: User) {
     return await updateProfile(this.auth.currentUser!, {
       displayName: usuario.nombre,
     });
   }
+  
   setDocument(path: string, data: any) {
     return setDoc(doc(getFirestore(), path), data);
   }

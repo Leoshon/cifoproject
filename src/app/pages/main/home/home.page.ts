@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { FireBaseService } from '../../../services/firebase.service';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { User } from '../../../models/user.model';
 import { UtilsService } from '../../../services/utils.service';
 import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
@@ -19,29 +18,22 @@ export class HomePage {
   usuario!: User;
   titulo: string = '';
   events: Events[] = [];
-  loading : boolean = false;
+  loading: boolean = false;
   constructor(
     private utilsServ: UtilsService,
     private authService: AuthService,
     private routh: Router,
     private firebaseServ: FireBaseService,
-    private loadingContr: LoadingController,
-    private alertContr: AlertController
-  ) {
-    /*  this.firebaseServ.getUserInfo(this.user()).subscribe((user) => {
-      this.usuario = user as User;
-      console.log(this.usuario);
-      
-      
-  });  */
-  }
+    private loadingContr: LoadingController
+  ) {}
+
   doRefresh(event: any) {
     this.getEvents();
     setTimeout(() => {
       event.target.complete();
     }, 1000);
   }
-  
+
   user(): User {
     console.log(this.utilsServ.getFromLocalStorage('user').uid);
     return this.utilsServ.getFromLocalStorage('user');
@@ -60,15 +52,7 @@ export class HomePage {
     this.routh.navigateByUrl('', { replaceUrl: true });
   }
   async changeImage() {
-    const image = /* await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Prompt,
-      promptLabelHeader: 'Seleccionar foto',
-      promptLabelPhoto: 'Seleccionar foto',
-      promptLabelPicture: 'Tomar foto',
-    }); */ await this.utilsServ.changeImage();
+    const image = await this.utilsServ.changeImage();
     console.log(image);
     if (image) {
       const loading = await this.loadingContr.create();
@@ -76,13 +60,10 @@ export class HomePage {
       const result = await this.firebaseServ.uploadImage(image);
       await loading.dismiss();
       if (!result) {
-      /*   const alert = await this.alertContr.create({
-          header: 'Error',
-          message: 'Error updating profile picture',
-          buttons: ['OK'],
-        });
-        await alert.present(); */
-        await this.utilsServ.showAlert('Error', 'Error updating profile picture');
+        await this.utilsServ.showAlert(
+          'Error',
+          'Error updating profile picture'
+        );
       }
     }
   }
@@ -103,14 +84,15 @@ export class HomePage {
     await loading.present();
 
     try {
-      let  imagePath = await this.firebaseServ.getImgFilePath(evento.image);
+      let imagePath = await this.firebaseServ.getImgFilePath(evento.image);
       await this.firebaseServ.deleteFile(imagePath);
       await this.firebaseServ.deleteEvent(path, evento).then(async () => {
-      await this.utilsServ.showAlert('Evento eliminado', '');
+        await this.utilsServ.showAlert('Evento eliminado', '');
       });
       await loading.dismiss();
     } catch (error) {
       console.log(error);
+      this.utilsServ.showAlert('Error', 'Error eliminando el evento');
     } finally {
       this.getEvents();
     }
@@ -124,7 +106,6 @@ export class HomePage {
         {
           text: 'No',
           role: 'cancel',
-      
         },
         {
           text: 'Si',
@@ -134,7 +115,6 @@ export class HomePage {
         },
       ],
     });
-
   }
   getEvents() {
     console.log(this.user().uid);
