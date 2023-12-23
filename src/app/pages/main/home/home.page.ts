@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { FireBaseService } from '../../services/firebase.service';
+import { AuthService } from '../../../services/auth.service';
+import { FireBaseService } from '../../../services/firebase.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { User } from '../../models/user.model';
-import { UtilsService } from '../../services/utils.service';
+import { User } from '../../../models/user.model';
+import { UtilsService } from '../../../services/utils.service';
 import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
 import { Events } from 'src/app/models/event.model';
 

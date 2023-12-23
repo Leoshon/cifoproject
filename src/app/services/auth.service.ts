@@ -16,18 +16,6 @@ export class AuthService {
   [x: string]: any;
   constructor(private auth: Auth) {}
   async login(usuario: User) {
- /*    try {
-      usuario = await signInWithEmailAndPassword(
-        this.auth,
-        usuario.email,
-        usuario.password
-      );
-
-      return usuario;
-    } catch (error) {
-      console.log(error);
-      return null;
-    } */
     return await signInWithEmailAndPassword(
       this.auth,
       usuario.email,
@@ -36,19 +24,6 @@ export class AuthService {
 
   }
   async register(usuario: User) {
-    /* try {
-      const user = await createUserWithEmailAndPassword(
-        this.auth,
-        usuario.email,
-        usuario.password,
-    
-
-      );
-      return user;
-    } catch (error) {
-      console.log(error);
-      return null;
-    } */
     return await createUserWithEmailAndPassword(
       this.auth,
       usuario.email,
@@ -56,10 +31,6 @@ export class AuthService {
     );
   }
   async updateUser(usuario: User) {
-  /*   const user = await updateProfile(this.auth.currentUser!, {
-      displayName: usuario.nombre,
-    });
-    return user; */
     return await updateProfile(this.auth.currentUser!, {
       displayName: usuario.nombre,
     });
