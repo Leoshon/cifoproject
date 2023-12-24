@@ -43,6 +43,7 @@ export class MainPage implements OnInit {
   async logOut() {
     await this.authService.logout();
     this.utilsServ.routerNavigate('/login');
+    
   }
 
 
