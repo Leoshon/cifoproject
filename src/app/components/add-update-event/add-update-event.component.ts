@@ -12,7 +12,7 @@ import { Events } from 'src/app/models/event.model';
   styleUrls: ['./add-update-event.component.scss'],
 })
 export class AddUpdateEventComponent implements OnInit {
-  utlisServ = inject(UtilsService);
+  utilsServ = inject(UtilsService);
   fireServ = inject(FireBaseService);
   loadCtrl = inject(LoadingController);
   alertCtrl = inject(AlertController);
@@ -22,7 +22,7 @@ export class AddUpdateEventComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private utilsServ: UtilsService
+    
   ) {}
   get categoria() {
     return this.eventForm.get('categoria');
@@ -55,10 +55,10 @@ export class AddUpdateEventComponent implements OnInit {
   }
 
   async closeModal() {
-    await this.utlisServ.dismisModal();
+    await this.utilsServ.dismisModal();
   }
   async takePhoto() {
-    const dataUrl = (await this.utlisServ.takePhoto('Agregar foto')).dataUrl;
+    const dataUrl = (await this.utilsServ.takePhoto('Agregar foto')).dataUrl;
     this.eventForm.get('image')?.setValue(dataUrl);
   }
   async submitEvent() {
@@ -86,9 +86,9 @@ export class AddUpdateEventComponent implements OnInit {
       await this.fireServ
         .addDocument(path, this.eventForm.value)
         .then(async () => {
-          await this.utlisServ.showAlert('Evento agregado', '');
+          await this.utilsServ.showAlert('Evento agregado', '');
         });
-      this.utlisServ.dismisModal({ success: true});
+      this.utilsServ.dismisModal({ success: true});
       await loading.dismiss();
     } catch (error) {
       console.log(error);
@@ -114,9 +114,9 @@ export class AddUpdateEventComponent implements OnInit {
       await this.fireServ
         .updateEvent(path, this.eventForm.value)
         .then(async () => {
-          await this.utlisServ.showAlert('Evento modfifcado', '');
+          await this.utilsServ.showAlert('Evento modfifcado', '');
         });
-      this.utlisServ.dismisModal({ success: true});
+      this.utilsServ.dismisModal({ success: true});
       await loading.dismiss();
     } catch (error) {
       console.log(error);

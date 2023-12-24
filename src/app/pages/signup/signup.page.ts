@@ -55,7 +55,6 @@ export class SignupPage implements OnInit {
           console.log(res?.user?.uid);
           this.credentials.value.uid = res?.user?.uid;
           await this.setUserInfo(this.credentials.value.uid as string);
-          // await this.getUserInfo(this.credentials.value.uid as string);
           this.utilsService.showAlert(
             'Bienvenido',
             `${this.credentials.value.name}`
@@ -70,7 +69,7 @@ export class SignupPage implements OnInit {
         })
         .finally(() => {
           loading.dismiss();
-          this.utilsService.routerNavigate('/');
+          this.utilsService.routerNavigate('/main/home');
         });
     }
   }

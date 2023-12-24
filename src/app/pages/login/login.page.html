@@ -1,8 +1,3 @@
-<!-- <ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
-    <ion-title><strong>My App</strong></ion-title>
-  </ion-toolbar>
-</ion-header> -->
 <app-header title="login"></app-header>
 <ion-content>
   <div class="d-flex-center">
@@ -10,47 +5,8 @@
       [formGroup]="credentials"
       (ngSubmit)="login()"
       (keypress.enter)="login()"
-      class="auth-form "
+      class="auth-form"
     >
-      <!--      <ion-item class="ion-margin-bottom">
-          <ion-icon slot="start" name="mail-outline"></ion-icon>
-          <ion-input
-            type="email"
-            formControlName="email"
-            label="Correo"
-            label-placement="floating"
-            autocomplete="autocomplete"
-          ></ion-input>
-          <ion-note
-            slot="error"
-            *ngIf="(email?.dirty || email?.touched) && email?.errors"
-            >Email is incorrect</ion-note
-          >
-        </ion-item>
-        <ion-item>
-          <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
-          <ion-input
-            [type]="type"
-            formControlName="password"
-            label="password"
-            label-placement="floating"
-          ></ion-input>
-          <ion-button
-            (click)="togglePassword()"
-            slot="end"
-            fill="clear"
-            shape="round"
-          >
-            <ion-icon
-              [name]="hide ? 'eye-outline': 'eye-off-outline'"
-            ></ion-icon>
-          </ion-button>
-          <ion-note
-            slot="error"
-            *ngIf="(password?.dirty || password?.touched) && password?.errors"
-            >Password is incorrect</ion-note
-          >
-        </ion-item> -->
       <app-custom-input
         icon="mail-outline"
         type="email"

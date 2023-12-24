@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
 import { FireBaseService } from '../../../services/firebase.service';
-import { AlertController, LoadingController } from '@ionic/angular';
 import { User } from '../../../models/user.model';
 import { UtilsService } from '../../../services/utils.service';
 import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
@@ -21,10 +18,8 @@ export class HomePage {
   loading: boolean = false;
   constructor(
     private utilsServ: UtilsService,
-    private authService: AuthService,
-    private routh: Router,
     private firebaseServ: FireBaseService,
-    private loadingContr: LoadingController
+   
   ) {}
 
   doRefresh(event: any) {
@@ -35,7 +30,6 @@ export class HomePage {
   }
 
   user(): User {
-    console.log(this.utilsServ.getFromLocalStorage('user').uid);
     return this.utilsServ.getFromLocalStorage('user');
   }
   ionViewWillEnter() {
@@ -47,15 +41,11 @@ export class HomePage {
       this.getEvents();
     });
   }
-  async logOut() {
-    await this.authService.logout();
-    this.routh.navigateByUrl('', { replaceUrl: true });
-  }
   async changeImage() {
     const image = await this.utilsServ.changeImage();
     console.log(image);
     if (image) {
-      const loading = await this.loadingContr.create();
+      const loading = await this.utilsServ.loading();
       await loading.present();
       const result = await this.firebaseServ.uploadImage(image);
       await loading.dismiss();
