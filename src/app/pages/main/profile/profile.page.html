@@ -4,11 +4,8 @@
     <img *ngIf="user().imageUrl" [src]="user().imageUrl" />
     <ion-icon *ngIf="!user().imageUrl" name="person-circle-outline" class="empty-icon"></ion-icon>
   </ion-avatar>
-  <ion-button (click)="changeImage()" class="photo-btn" shape="round" mode="ios">
-    <ion-icon  name="camera-outline"></ion-icon>
-  </ion-button>
   <h2>{{user().nombre}}</h2>
-  <ion-item button detail>
+  <ion-item button detail (click)="updateUserName()">
     <ion-icon color="primary" slot="start" name="person-outline"></ion-icon>
     <ion-label>Editar Perfil</ion-label>
   </ion-item>

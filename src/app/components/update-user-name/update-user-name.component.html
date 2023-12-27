@@ -1,0 +1,31 @@
+<app-header title="Editar Perfil" [isModal]="true"></app-header>
+<ion-content>
+  <form [formGroup]="form" (submit)="updateUser()" class="ion-padding ion-text-center" (keypress.enter)="updateUser()">
+    <ion-avatar>
+      <img *ngIf="form.value.image" [src]="form.value.image" />
+      <ion-icon *ngIf="!form.value.image" name="person-circle-outline" class="empty-icon"></ion-icon>
+    </ion-avatar>
+    <ion-button (click)="changeImage()" class="photo-btn" shape="round" mode="ios">
+      <ion-icon  name="camera-outline"></ion-icon>
+    </ion-button>
+    <app-custom-input
+      [controlName]="form.controls.name"
+      label="Nombre"
+      type="text"
+      icon="person-outline"
+    >
+    </app-custom-input>
+    <div class="validatros" *ngIf="form.controls.name.errors && form.controls.name.touched">
+      <div class="error-message" *ngIf="form.controls.name.errors?.['required']">
+        Nombre es requerido
+      </div>
+      <div class="error-message" *ngIf="form.controls.name.errors?.['minlength']">
+        Nombre debe tener al menos 2 caracteres
+      </div>
+    </div>
+    <ion-button mode="ios" class="ion-margin" shape="round" type="submit" [disabled]="form.invalid">
+      Actualizar
+      <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-button>
+  </form>
+</ion-content>

@@ -3,6 +3,9 @@
       <ion-buttons slot="start">
         <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
         <ion-menu-button *ngIf="menuButton" menu="menu-content"></ion-menu-button>
+        <ion-button *ngIf="isModal" (click)="closeModal()">
+          <ion-icon name="close-circle-outline" ></ion-icon>
+        </ion-button>
       </ion-buttons>
     <ion-title><strong>{{title}}</strong>
       <div class="usuario">E V E N T B O O K</div>

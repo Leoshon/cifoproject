@@ -29,7 +29,11 @@ export class FireBaseService {
     console.log(user)
     return docData(userDocRef);
   } 
- 
+ async getUserInfo(usuario:User){
+   const userDocRef = doc(this.firestore, `users/${usuario.uid}`);
+   return docData(userDocRef);
+
+ }
   async uploadImage(photo: Photo) {
     const user = this.auth.currentUser;
     const path = `${user?.uid}/profile.png`;
@@ -73,6 +77,10 @@ export class FireBaseService {
   }
   updateEvent(path: string, data: any) {
     return updateDoc(doc(this.firestore, path), data);
+  }
+  updateUser(user: any) {
+    const userDocRef = doc(this.firestore, `users/${user.uid}`);
+    return updateDoc(userDocRef, user);
   }
   deleteEvent(path: string, data: any) {
     return deleteDoc(doc(this.firestore, path));

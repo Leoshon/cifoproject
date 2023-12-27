@@ -16,7 +16,7 @@ export class SignupPage implements OnInit {
       Validators.required,
       Validators.minLength(6),
     ]),
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(2)]),
     uid: new FormControl(''),
   });
 
@@ -36,13 +36,6 @@ export class SignupPage implements OnInit {
   }
 
   ngOnInit() {
-    /*  this.credentials = this.fb.group({
-      uid: [''],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-    });
-    this.type = 'password'; */
   }
   async signUp() {
     if (this.credentials.valid) {

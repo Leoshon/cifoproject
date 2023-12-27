@@ -1,21 +1,12 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="closeModal()">
-        <ion-icon name="close-circle-outline" ></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center">{{evento ? 'Update' : 'Add'}}</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="{{evento ? 'Update' : 'Add'}}" [isModal]="true"></app-header>
 <ion-content>
   <form [formGroup]="eventForm" class="ion-padding ion-text-center" (submit)="submitEvent()">
     <ion-avatar *ngIf="eventForm.value.image" class="ion-margin-bottom">
       <img [src]="eventForm.value.image" />
     </ion-avatar>
     <ion-icon *ngIf="!eventForm.value.image" name="image-outline" class="image-icon"></ion-icon>
-    <ion-button (click)="takePhoto()" expand="block" fill="clear" shape="round">
-      Click me
+    <ion-button (click)="takePhoto()" class="photo-btn" shape="round" mode="ios">
+      <ion-icon  name="camera-outline"></ion-icon>
     </ion-button>
 
     <ion-item class="ion-margin-bottom">

@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { FireBaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { UpdateUserNameComponent } from 'src/app/components/update-user-name/update-user-name.component';
 
 @Component({
   selector: 'app-profile',
@@ -11,12 +12,18 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class ProfilePage implements OnInit {
   utilsServ = inject(UtilsService);
   fireServ = inject(FireBaseService);
+  usuario!: User;
   constructor() { }
 
   ngOnInit() {
+   console.log (this.user());
+  
+  }
+  ionViewWillEnter() {
+    this.getUserInfo(this.user());
   }
   user(): User {
-    return this.utilsServ.getFromLocalStorage('user');
+    return this.usuario = this.utilsServ.getFromLocalStorage('user');
   }
   async changeImage() {
     const image = await this.utilsServ.changeImage();
@@ -33,5 +40,23 @@ export class ProfilePage implements OnInit {
         );
       }
     }
+  }
+  async updateUserName() {
+   let success= await this.utilsServ.presentModal({
+      component: UpdateUserNameComponent,
+      cssClass: 'update-user-name',
+      componentProps: {
+        usuario: this.user(),
+      }
+
+    });
+    if(success){
+      this.usuario = this.utilsServ.getFromLocalStorage('user');
+    }
+  }
+  async getUserInfo(usuario:User){
+    const userDocRef = this.fireServ.getUserInfo(usuario);
+    return await userDocRef;
+
   }
 }
