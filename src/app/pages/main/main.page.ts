@@ -25,6 +25,11 @@ export class MainPage implements OnInit {
       url: '/main/profile',
       icon: 'person'
     },
+    {
+      title: 'Formula',
+      url: '/main/formulapage',
+      icon: 'car-sport'
+    },
   ]
   router = inject(Router);
   currentPath: string = '';

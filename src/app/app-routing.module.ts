@@ -29,10 +29,15 @@ const routes: Routes = [
     
   },
   {
+    path: 'formulapage',
+    loadChildren: () => import('./pages/main/formulapage/formulapage.module').then( m => m.FormulapagePageModule)
+  },
+  {
     path:'**',
     redirectTo:'',
     pathMatch:'full'
   },
+
  
 
  

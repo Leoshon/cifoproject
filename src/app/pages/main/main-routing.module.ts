@@ -19,8 +19,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./profile/profile.module').then((m) => m.ProfilePageModule),
       },
+      {
+        path: 'formulapage',
+        loadChildren: () => import('./formulapage/formulapage.module').then( m => m.FormulapagePageModule)
+      },
     ],
   },
+
 ];
 
 @NgModule({

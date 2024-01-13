@@ -1,13 +1,14 @@
-import { NgModule, inject } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MainPageRoutingModule } from './main-routing.module';
+import { FormulapagePageRoutingModule } from './formulapage-routing.module';
 
-import { MainPage } from './main.page';
+import { FormulapagePage } from './formulapage.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TrivialComponent } from 'src/app/components/trivial/trivial.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormulaService } from 'src/app/services/formula.service';
 
@@ -17,18 +18,16 @@ import { FormulaService } from 'src/app/services/formula.service';
     CommonModule,
     FormsModule,
     IonicModule,
-    MainPageRoutingModule,
+    FormulapagePageRoutingModule,
     SharedModule,
     HttpClientModule
+    
   ],
   exports: [
     SharedModule,
-    HttpClientModule
+    
   ],
   providers:[FormulaService],
-  declarations: [MainPage]
+  declarations: [FormulapagePage,TrivialComponent]
 })
-export class MainPageModule {
-  
-
-}
+export class FormulapagePageModule {}

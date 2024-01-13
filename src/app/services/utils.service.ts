@@ -83,4 +83,7 @@ export class UtilsService {
   routerNavigate(url: string) {
     return this.router.navigateByUrl(url, { replaceUrl: true });
   }
+  shaffle(array: any[]) {
+    return array.sort(() => Math.random() - 0.5);
+  }
 }

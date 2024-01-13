@@ -1,0 +1,42 @@
+/* .correct{
+    background-color: dodgerblue;
+    color:green;
+    width: 60px;
+}
+.incorrect{
+  background-color: red;
+  color:white;
+} */
+
+ion-card{
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+    width: 90%;
+    background-color: whitesmoke;
+  
+
+}
+
+ion-col{
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    .name{
+        font-size: 20px;
+    }
+   
+    .answer{
+        font-size: 15px;
+        
+    }
+    .correct{
+        background-color: dodgerblue;
+        color:gold;
+    }
+    .incorrect{
+      background-color: red;
+      color:#333;
+    }
+
+}
