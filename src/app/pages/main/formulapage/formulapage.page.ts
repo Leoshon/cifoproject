@@ -19,6 +19,7 @@ export class FormulapagePage implements OnInit {
  answers: any=[];
  usuario = {} as User;
  request: boolean = false;
+ quizMoney: number = 0;
   constructor() { }
 
   ngOnInit() {
@@ -33,7 +34,10 @@ export class FormulapagePage implements OnInit {
     
   
   }
-  getSeazon(){
+  ionViewWillEnter(){
+
+  }
+ /*  getSeazon(){
     this.formulaService.getSeazon().subscribe({
       next: (data) => {
         console.log(data);
@@ -43,8 +47,8 @@ export class FormulapagePage implements OnInit {
       },
     })
    
-  }
-  sendRequest(){
+  } */
+  /* sendRequest(){
     this.request=true;
       this.formulaService.getRequest().subscribe({
       next: (data) => {
@@ -68,8 +72,8 @@ export class FormulapagePage implements OnInit {
       
     })
    
-  }
- async getChoise(choise:any,eTarget:any){
+  } */
+ /* async getChoise(choise:any,eTarget:any){
     if (choise == this.results[0].correct_answer) {
       eTarget.target.classList.add("correct");
       this.utilService.presentToast({
@@ -82,6 +86,7 @@ export class FormulapagePage implements OnInit {
       if(this.usuario.quizPoints){
         this.usuario.quizPoints += 10;
         this.utilService.saveInLocalStorage('user', this.usuario);
+        this.quizMoney = this.usuario.quizPoints/10;
       }
       this.fireService.updateUser(this.usuario);
     } else {
@@ -92,8 +97,8 @@ export class FormulapagePage implements OnInit {
     await loading.present();
     await loading.dismiss();
     this.request=false;
-  }
-/*   async goToTrivial() {
+  } */
+  async goToTrivial() {
     let success = await this.utilService.presentModal({
       component: TrivialComponent,
       componentProps: {
@@ -103,6 +108,6 @@ export class FormulapagePage implements OnInit {
     if (success) {
       console.log("success");
     }
-  } */
+  } 
 
 }
