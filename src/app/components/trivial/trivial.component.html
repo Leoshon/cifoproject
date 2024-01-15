@@ -1,16 +1,29 @@
 
-<app-header title="Trivial Casino" [isModal]="true"></app-header>
+<app-header *ngIf="!request" title="Trivial Casino" [isModal]="true"></app-header>
 <ion-content>
+  <div class="glass-content">
     <ion-item>
-        <ion-label>Get questions</ion-label>
+
     <ion-buttons slot="start">
         <ion-button [disabled]="request" (click)="sendRequest()">
             <ion-icon slot="start" name="send"></ion-icon>
-            Request
+            Request a question
           </ion-button>
     </ion-buttons>
     </ion-item>
- <div  class="timer">{{maxtime}}</div>
+    <ion-row>
+      <ion-col size="12" style="text-align: center;">
+        <ion-label style="color: black; font-family: 'fantasy'; font-size: 19px;">
+          Time Left
+        </ion-label>
+
+        <div style="margin-top: 2%; ">
+          <div  class="timer">{{maxtime}}</div>
+        </div>
+
+      </ion-col>
+    </ion-row>
+ 
  <ion-grid>
     <ion-row>
       <ion-col size="12"  *ngFor="let result of results">
@@ -38,5 +51,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+</div>
 </ion-content>
 

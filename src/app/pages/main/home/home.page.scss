@@ -25,3 +25,76 @@ ion-avatar{
   font-size: 20px;
   font-weight: 700;
 }
+ion-col{
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  .name{
+      font-size: 30px;
+      letter-spacing: 3px;
+  }
+  .points{
+      font-size: 25px;
+      letter-spacing: normal;
+  } 
+  ion-avatar{
+    width: 8px;
+    height: 8px;
+  }
+
+}
+.glass-content {
+  background: rgba(19, 63, 176, 0.27);
+  box-shadow: 0 4px 30px rgba(7, 77, 216, 0.1);
+  backdrop-filter: blur(25.3px);
+  -webkit-backdrop-filter: blur(25.3px);
+  width: 100%;
+  min-height: 100vh;
+}
+
+.d-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-content {
+  --ion-background-color: url(/assets/img/startBackground.png);
+  --color: white;
+}
+
+
+
+ion-toolbar {
+  --background: transparent;
+  background: rgba(19, 63, 176, 0.27);
+  box-shadow: 0 4px 30px rgba(7, 77, 216, 0.1);
+  backdrop-filter: blur(25.3px);
+  -webkit-backdrop-filter: blur(25.3px);
+  color: white;
+}
+
+
+ion-card {
+  margin: 20px;
+  background: rgba(7, 7, 7, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+ion-item {
+  --background: transparent;
+  color: white;
+}
+
+ion-icon {
+  color: yellow;
+}
+ion-button{
+  --color:var(--ion-color-info);
+  font-size: 20px;
+}

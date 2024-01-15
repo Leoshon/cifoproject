@@ -26,9 +26,9 @@ export class MainPage implements OnInit {
       icon: 'person'
     },
     {
-      title: 'Formula',
+      title: 'Quiz',
       url: '/main/formulapage',
-      icon: 'car-sport'
+      icon: 'cash'
     },
   ]
   router = inject(Router);

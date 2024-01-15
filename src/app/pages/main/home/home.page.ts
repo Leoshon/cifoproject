@@ -16,6 +16,7 @@ export class HomePage {
   titulo: string = '';
   events: Events[] = [];
   loading: boolean = false;
+  members: any[] = [];
   constructor(
     private utilsServ: UtilsService,
     private firebaseServ: FireBaseService,
@@ -39,6 +40,7 @@ export class HomePage {
       console.log(this.usuario);
       this.utilsServ.saveInLocalStorage('user', this.usuario);
       this.getEvents();
+      this.getAllUsers();
     });
   }
   async changeImage() {
@@ -114,6 +116,30 @@ export class HomePage {
       next: (events: any) => {
         this.events = events;
         console.log(this.events);
+        this.loading = false;
+        sub.unsubscribe();
+      },
+    });
+  }
+  getAllUsers() {
+    this.firebaseServ.getAllUsers().subscribe({
+      next: (users: any) => {
+        console.log(users);
+        this.members = users.filter((user: any) => user.uid != this.usuario.uid);
+        console.log(this.members);
+
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  getEventsByUser(uid: string) {
+    let path = `users/${uid}/events`;
+    this.loading = true;
+    let sub = this.firebaseServ.getEvents(path).subscribe({
+      next: (events: any) => {
+        console.log(events);
         this.loading = false;
         sub.unsubscribe();
       },

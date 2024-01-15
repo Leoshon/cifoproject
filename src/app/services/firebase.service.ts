@@ -23,6 +23,10 @@ export class FireBaseService {
     private storage: Storage,
     private utilService: UtilsService
   ) {}
+  getAllUsers() {
+    const ref = collection(this.firestore, 'users');
+    return collectionData(ref, { idField: 'id' });
+  }
    getUserProfile() {
     const user = this.auth.currentUser;
     const userDocRef = doc(this.firestore, `users/${user?.uid}`);

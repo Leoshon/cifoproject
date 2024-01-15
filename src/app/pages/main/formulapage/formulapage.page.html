@@ -1,29 +1,44 @@
-<app-header [menuButton]="true"></app-header>
-    
-    <ion-content>
-      
-      
-      <ion-item>
-       <ion-label>Get questions</ion-label>
-        <ion-buttons slot="end">
-          <ion-icon name="cash-outline"></ion-icon>
-       <ion-button (click)="goToTrivial()" expand="block" fill="clear" shape="round">
-        Go to Trivial
-       </ion-button>
-        </ion-buttons>
-      </ion-item>
+<app-header [menuButton]="true" ></app-header>
 
-    <ion-grid>
+<ion-content>
+  <div class="glass-content">
+    <ion-item>
+      <ion-buttons slot="end">
+        <ion-icon name="cash-outline"></ion-icon>
+        <ion-button
+          (click)="goToTrivial()"
+          expand="block"
+          fill="clear"
+          shape="round"
+        >
+        Go to Quiz
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+   
+    <ion-grid >
       <ion-row>
-        <ion-col size="12">
-          <div class="name">{{usuario.nombre}}</div>
-        </ion-col>
-        <ion-col size="12">
-          <div class="points">Quiz Money: {{usuario.quizPoints}} €  </div>
+        <ion-col size="12"  size-lg="6" size-md="6" >
+          <ion-card>
+        <ion-grid >
+          <ion-row>
+            <ion-col class="ion-padding" size="12" size-lg="4" size-sm="4">
+              <ion-avatar>
+                <img [src]="usuario.imageUrl" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col class="ion-padding" size="12" size-lg="8" size-sm="8">
+              <div class="name">{{usuario.nombre}}</div>
+            </ion-col>
+            <ion-col size="12">
+              <div class="points">Quiz Money: {{usuario.quizPoints}} €</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+          </ion-card>
         </ion-col>
       </ion-row>
-
     </ion-grid>
-
-    
+  </div>
 </ion-content>

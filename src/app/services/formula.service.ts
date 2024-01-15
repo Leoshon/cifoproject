@@ -20,7 +20,7 @@ export class FormulaService {
     return this.httpClient.get(this.apiURL, this.httpOptions)
   }
   getRequest(){
-    let url='https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple';
+    let url='https://opentdb.com/api.php?amount=1&difficulty=hard&type=multiple';
     const options = {
       method: 'POST',
       
