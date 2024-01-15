@@ -1,0 +1,28 @@
+<app-header title="Detalles" [isModal]="true"></app-header>
+<ion-content  *ngIf="events" >
+  <div class="ion-text-center ion-padding-top" *ngFor="let e of events">
+    <ion-avatar>
+      <img [src]="e.image" />
+    </ion-avatar>
+    <h1>{{e.categoria}}</h1>
+    <div>Estatus: {{e.pais}}</div>
+    <ion-item>
+      <ion-label>Primera apariencia <br> <strong>{{e.pais}}</strong></ion-label>
+      <ion-icon slot="start" name="location-outline"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>Visto por última vez... <br> <strong>{{e.descripcion}}</strong></ion-label>
+      <ion-icon slot="start" name="location-outline"></ion-icon>
+    </ion-item>
+    <ion-item lines="none">
+     <ion-icon name="videocam" slot="start"></ion-icon>
+        <ion-label>Video tracks <br> <strong>{{e.descripcion}}</strong></ion-label>
+      <ion-icon name="chevron-down" slot="start"></ion-icon>
+      </ion-item>
+  </div>
+</ion-content>
+<ion-content *ngIf="events.length===0">
+  <ion-item>
+    <ion-label>No hay eventos</ion-label>
+  </ion-item>
+</ion-content>

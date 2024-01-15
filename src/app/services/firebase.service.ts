@@ -25,7 +25,7 @@ export class FireBaseService {
   ) {}
   getAllUsers() {
     const ref = collection(this.firestore, 'users');
-    return collectionData(ref, { idField: 'id' });
+    return collectionData(ref, { idField: 'uid' });
   }
    getUserProfile() {
     const user = this.auth.currentUser;

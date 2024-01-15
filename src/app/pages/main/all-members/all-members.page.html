@@ -1,0 +1,46 @@
+<app-header title="Otros" [menuButton]="true"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="doRefresh($event)"
+    pullFactor="0.8"
+    pullMin="60"
+    pullMax="120"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item-sliding class="event-item" *ngFor="let m of members">
+   
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-lg="6" size-md="6">
+              <ion-card>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col
+                      class="ion-padding"
+                      size="12"
+                      size-lg="4"
+                      size-sm="4"
+                    >
+                      <ion-avatar>
+                        <img [src]="m.imageUrl" />
+                      </ion-avatar>
+                      <div class="name">{{m.nombre}}</div>
+                      <div class="points">Quiz Money: {{m.quizPoints}} €</div>
+                      <ion-button (click)=" membersDetail(m.uid)" expand="block" fill="clear" shape="round">
+                        More info
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+     
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

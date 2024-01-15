@@ -40,7 +40,7 @@ export class HomePage {
       console.log(this.usuario);
       this.utilsServ.saveInLocalStorage('user', this.usuario);
       this.getEvents();
-      this.getAllUsers();
+      
     });
   }
   async changeImage() {

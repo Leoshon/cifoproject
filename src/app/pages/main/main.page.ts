@@ -30,6 +30,11 @@ export class MainPage implements OnInit {
       url: '/main/formulapage',
       icon: 'cash'
     },
+    {
+      title: 'Otros',
+      url: '/main/all-members',
+      icon: 'people-outline'
+    },
   ]
   router = inject(Router);
   currentPath: string = '';

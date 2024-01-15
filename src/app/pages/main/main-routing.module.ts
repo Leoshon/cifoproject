@@ -23,8 +23,13 @@ const routes: Routes = [
         path: 'formulapage',
         loadChildren: () => import('./formulapage/formulapage.module').then( m => m.FormulapagePageModule)
       },
+      {
+        path: 'all-members',
+        loadChildren: () => import('./all-members/all-members.module').then( m => m.AllMembersPageModule)
+      },
     ],
   },
+
 
 ];
 
