@@ -35,9 +35,7 @@ export class HomePage {
   }
   ionViewWillEnter() {
     this.firebaseServ.getUserProfile().subscribe((profile) => {
-      //console.log(profile);
       this.usuario = profile as User;
-      console.log(this.usuario);
       this.utilsServ.saveInLocalStorage('user', this.usuario);
       this.getEvents();
       
@@ -121,7 +119,7 @@ export class HomePage {
       },
     });
   }
-  getAllUsers() {
+/*   getAllUsers() {
     this.firebaseServ.getAllUsers().subscribe({
       next: (users: any) => {
         console.log(users);
@@ -133,8 +131,8 @@ export class HomePage {
         console.log(error);
       },
     });
-  }
-  getEventsByUser(uid: string) {
+  } */
+/*   getEventsByUser(uid: string) {
     let path = `users/${uid}/events`;
     this.loading = true;
     let sub = this.firebaseServ.getEvents(path).subscribe({
@@ -144,5 +142,5 @@ export class HomePage {
         sub.unsubscribe();
       },
     });
-  }
+  } */
 }

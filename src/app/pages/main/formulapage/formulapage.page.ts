@@ -25,17 +25,13 @@ export class FormulapagePage implements OnInit {
   ngOnInit() {
     //this.getSeazon();
     //this.getWeather();
-    this.usuario = this.utilService.getFromLocalStorage('user');
-    if(this.usuario.quizPoints == null){
-      this.usuario.quizPoints = 10;
-    }else{
-      this.usuario.quizPoints += 10;
-    }
     
-  
+    
+    
   }
   ionViewWillEnter(){
-
+    
+    this.usuario = this.utilService.getFromLocalStorage('user');
   }
  /*  getSeazon(){
     this.formulaService.getSeazon().subscribe({

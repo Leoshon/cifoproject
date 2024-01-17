@@ -4,27 +4,30 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-
+  
   <ion-list *ngIf="!loading">
     <ion-item-sliding class="event-item" *ngFor="let e of events">
-      <ion-item>
+      <ion-icon  name="arrow-back" slot="end"></ion-icon>
+      
+      <ion-item class="ion-text-center">
         <ion-avatar>
           <img [src]="e.image" />
         </ion-avatar>
         <ion-label>
           <div class="name"><strong>Categoria: </strong>{{e.categoria}}</div>
           <div class="data">
-            <strong>Pais: </strong>{{e.pais}}<br />
-            <strong>Descripcion: </strong>{{e.descripcion}}<br />
-            <strong>Precio:</strong>{{e.precio}}
+            <p><strong>Pais: </strong>{{e.pais}}</p>
+            <p><strong>Descripción: </strong>{{e.descripcion}}</p>
+            <p><strong>Precio:</strong>{{e.precio}}</p>
           </div>
         </ion-label>
       </ion-item>
-      <ion-item-options>
-        <ion-item-option color="primary" (click)="addUpdateEvent(e)">
+   
+      <ion-item-options side="end">
+        <ion-item-option color="primary" (click)="addUpdateEvent(e)" expandable>
           <ion-icon class="option-btn" name="create-outline"></ion-icon>
         </ion-item-option>
-        <ion-item-option color="danger">
+        <ion-item-option color="danger" expandable>
           <ion-icon
             class="option-btn"
             name="trash-outline"
@@ -34,6 +37,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
   <ion-list *ngIf="loading">
     <ion-item class="event-item" *ngFor="let e of [1,1,1,1,1,1,1]">
       <ion-avatar slot="start">

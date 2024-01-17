@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FireBaseService } from '../../../services/firebase.service';
 import { User } from '../../../models/user.model';
 import { UtilsService } from '../../../services/utils.service';
-import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
 import { Events } from 'src/app/models/event.model';
 import { MembersStatsComponent } from 'src/app/components/members-stats/members-stats.component';
 

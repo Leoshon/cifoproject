@@ -1,49 +1,73 @@
-
-<app-header *ngIf="!request" title="Trivial Casino" [isModal]="true"></app-header>
+<app-header
+  *ngIf="!request"
+  title="Trivial Casino"
+  [isModal]="true"
+></app-header>
 <ion-content>
-  <div class="glass-content">
-    <ion-item>
-
-    <ion-buttons slot="start">
-        <ion-button [disabled]="request" (click)="sendRequest()">
-            <ion-icon slot="start" name="send"></ion-icon>
-            Request a question
-          </ion-button>
+  <ion-item>
+    <ion-buttons class="ion-text-center">
+      <ion-button [disabled]="request" (click)="sendRequest()">
+        <ion-icon slot="start" name="send"></ion-icon>
+        Request a question
+      </ion-button>
     </ion-buttons>
-    </ion-item>
-    <ion-row>
-      <ion-col size="12" style="text-align: center;">
-        <ion-label style="color: black; font-family: 'fantasy'; font-size: 19px;">
-          Time Left
-        </ion-label>
+  </ion-item>
+  <ion-row *ngIf="request">
+    <ion-col size="12" style="text-align: center">
+      <ion-label style="color: gold; font-family: 'fantasy'; font-size: 25px;">
+        Time Left
+      </ion-label>
 
-        <div style="margin-top: 2%; ">
-          <div  class="timer">{{maxtime}}</div>
-        </div>
+      <div class="timer">
+        <div>{{ maxtime }}</div>
+      </div>
+    </ion-col>
+  </ion-row>
 
-      </ion-col>
-    </ion-row>
- 
- <ion-grid>
+  <ion-grid>
     <ion-row>
-      <ion-col size="12"  *ngFor="let result of results">
+      <ion-col size="12" *ngFor="let result of results">
         <ion-card>
           <ion-grid>
             <ion-row>
-              <ion-col class="ion-padding"size="12" >
-                <div class="name">{{result.question}}</div>
+              <ion-col class="ion-padding" size="12">
+                <div class="question">{{ result.question }}</div>
               </ion-col>
-              <ion-col class="ion-padding" size="6" size-lg="6" size-sm="6" (click)="getChoise(answers[0],$event)">
-                <div class="answer">{{answers[0]}}</div>
+              <ion-col
+                class="ion-padding"
+                size="6"
+                size-lg="6"
+                size-sm="6"
+                (click)="getChoise(answers[0], $event)"
+              >
+                <div class="answer">{{ answers[0] }}</div>
               </ion-col>
-              <ion-col class="ion-padding" size="6" size-lg="6" size-sm="6" (click)="getChoise(answers[1],$event)">
-                <div class="answer">{{answers[1]}}</div>
+              <ion-col
+                class="ion-padding"
+                size="6"
+                size-lg="6"
+                size-sm="6"
+                (click)="getChoise(answers[1], $event)"
+              >
+                <div class="answer">{{ answers[1] }}</div>
               </ion-col>
-              <ion-col class="ion-padding" size="6" size-lg="6" size-sm="6" (click)="getChoise(answers[2],$event)">
-                <div class="answer">{{answers[2]}}</div>
+              <ion-col
+                class="ion-padding"
+                size="6"
+                size-lg="6"
+                size-sm="6"
+                (click)="getChoise(answers[2], $event)"
+              >
+                <div class="answer">{{ answers[2] }}</div>
               </ion-col>
-              <ion-col class="ion-padding" size="6" size-lg="6" size-sm="6" (click)="getChoise(answers[3],$event)">
-                <div class="answer">{{answers[3]}}</div>
+              <ion-col
+                class="ion-padding"
+                size="6"
+                size-lg="6"
+                size-sm="6"
+                (click)="getChoise(answers[3], $event)"
+              >
+                <div class="answer">{{ answers[3] }}</div>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -51,6 +75,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</div>
 </ion-content>
-

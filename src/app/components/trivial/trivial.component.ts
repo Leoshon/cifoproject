@@ -38,15 +38,31 @@ export class TrivialComponent implements OnInit {
           position: 'middle',
         });
         this.utilService.dismisModal({ success: false });
-        if (this.usuario.quizPoints) {
+        if (this.usuario.quizPoints != 0 && this.usuario.quizPoints) {
           this.usuario.quizPoints -= 10;
           this.utilService.saveInLocalStorage('user', this.usuario);
+          this.fireService.updateUser(this.usuario);
+        }else{
+          this.usuario.quizPoints=0;
+          this.utilService.saveInLocalStorage('user', this.usuario);
+          this.fireService.updateUser(this.usuario);
         }
-        this.fireService.updateUser(this.usuario);
       }
     }, 1000);
   }
+   sanitize(txt: string) {
+    txt.replace(/&quot;/g, "\"")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#039;/g, "'")
+    .replace(/&deg;/g, "°")
+    .replace(/&eacute;/g, "é")
+    .replace(/&aacute;/g, "á")
+    return txt;
+  }
   async sendRequest() {
+  
     this.request = true;
     this.setTimer();
     this.formulaService.getRequest().subscribe({
@@ -54,11 +70,21 @@ export class TrivialComponent implements OnInit {
         console.log(data);
         this.datos = data;
         console.log(this.datos.results);
+        this.datos.results[0].question = this.datos.results[0].question.replace(/&quot;/g, "\"").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#039;/g, "'").replace(/&deg;/g, "°");
+        this.datos.results[0].correct_answer = this.datos.results[0].correct_answer.replace(/&quot;/g, "\"").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#039;/g, "'").replace(/&deg;/g, "°");
+        for (let i = 0; i < this.datos.results[0].incorrect_answers.length; i++) {
+          this.datos.results[0].incorrect_answers[i] = this.datos.results[0].incorrect_answers[i].replace(/&quot;/g, "\"").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#039;/g, "'").replace(/&deg;/g, "°");
+        }
+        console.log(this.datos.results[0].question);
         this.results = this.datos.results;
+        console.log(this.results[0].question)
+        //this.results[0].question =  this.sanitize(this.results[0].question);
+       
         this.answers = [
           ...this.results[0].incorrect_answers,
           this.results[0].correct_answer,
         ];
+
         this.answers = this.utilService.shaffle(this.answers);
         console.log(this.answers);
       },
@@ -78,11 +104,11 @@ export class TrivialComponent implements OnInit {
         icon: 'happy-outline',
         position: 'middle',
       });
-      if (this.usuario.quizPoints) {
+      if (this.usuario.quizPoints || this.usuario.quizPoints == 0) {
         this.usuario.quizPoints += 10;
         this.utilService.saveInLocalStorage('user', this.usuario);
+        this.fireService.updateUser(this.usuario);
       }
-      this.fireService.updateUser(this.usuario);
     } else {
       console.log('incorrect');
       eTarget.target.classList.add('incorrect');
@@ -93,11 +119,15 @@ export class TrivialComponent implements OnInit {
         icon: 'sad-outline',
         position: 'middle',
       });
-      if (this.usuario.quizPoints) {
+      if (this.usuario.quizPoints && this.usuario.quizPoints != 0) {
         this.usuario.quizPoints -= 10;
         this.utilService.saveInLocalStorage('user', this.usuario);
+        this.fireService.updateUser(this.usuario);
+      }else{
+        this.usuario.quizPoints=0;
+        this.utilService.saveInLocalStorage('user', this.usuario);
+        this.fireService.updateUser(this.usuario);
       }
-      this.fireService.updateUser(this.usuario);
     }
 
     this.utilService.dismisModal({ success: true });

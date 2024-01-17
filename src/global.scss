@@ -54,9 +54,11 @@ ion-button {
 }
 
 .d-flex-center {
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    padding: 20px;
 }
 
 
@@ -70,6 +72,7 @@ ion-button {
     ion-label {
         position: relative;
         bottom: 2px;
+        color: gold;
     }
 
     .eye-icon {

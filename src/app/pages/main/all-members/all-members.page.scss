@@ -1,0 +1,18 @@
+ion-col {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  .name {
+    font-size: 30px;
+    letter-spacing: 3px;
+  }
+  .points {
+    font-size: 25px;
+    
+  }
+  ion-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+}

@@ -9,6 +9,7 @@ import { AllMembersPageRoutingModule } from './all-members-routing.module';
 import { AllMembersPage } from './all-members.page';
 import { MembersStatsComponent } from 'src/app/components/members-stats/members-stats.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { GetCommentsComponent } from 'src/app/components/get-comments/get-comments.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule
   ],
   exports: [IonicModule],
-  declarations: [AllMembersPage,MembersStatsComponent]
+  declarations: [AllMembersPage,MembersStatsComponent,GetCommentsComponent]
 })
 export class AllMembersPageModule {}

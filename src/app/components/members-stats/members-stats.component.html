@@ -1,24 +1,56 @@
 <app-header title="Detalles" [isModal]="true"></app-header>
-<ion-content  *ngIf="events" >
+<ion-content *ngIf="events">
   <div class="ion-text-center ion-padding-top" *ngFor="let e of events">
-    <ion-avatar>
-      <img [src]="e.image" />
-    </ion-avatar>
-    <h1>{{e.categoria}}</h1>
-    <div>Estatus: {{e.pais}}</div>
-    <ion-item>
-      <ion-label>Primera apariencia <br> <strong>{{e.pais}}</strong></ion-label>
-      <ion-icon slot="start" name="location-outline"></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-label>Visto por última vez... <br> <strong>{{e.descripcion}}</strong></ion-label>
-      <ion-icon slot="start" name="location-outline"></ion-icon>
-    </ion-item>
-    <ion-item lines="none">
-     <ion-icon name="videocam" slot="start"></ion-icon>
-        <ion-label>Video tracks <br> <strong>{{e.descripcion}}</strong></ion-label>
-      <ion-icon name="chevron-down" slot="start"></ion-icon>
-      </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-card>
+          <ion-col class="ion-padding" size="12">
+            <ion-avatar>
+              <img [src]="e.image" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col class="ion-padding" size="12">
+            <div class="name">Categoria: {{ e.categoria }}</div>
+          </ion-col>
+          <ion-col class="ion-padding" size="12">
+            <div>
+              Descripcion: <strong>{{ e.descripcion }}</strong>
+            </div>
+          </ion-col>
+          <ion-col class="ion-padding" size="12">
+            <ion-button
+              (click)="callModal(e.id)"
+              expand="block"
+              shape="round"
+            >
+              Ver Comentarios
+            </ion-button>
+          </ion-col>
+          <ion-col size="12">
+            <form [formGroup]="eventForm" class="ion-padding ion-text-center" >
+              <ion-item class="ion-margin-bottom">
+                <ion-textarea
+                  type="text"
+                  formControlName="comment"
+                  label="Comentario"
+                  label-placement="floating"
+                ></ion-textarea>
+               
+              </ion-item>
+              <ion-button
+                expand="block"
+                fill="outline"
+                color="primary"
+                (click)="sendComment(e.id)"
+                [disabled]="!eventForm.valid"
+              >
+                Enviar
+              </ion-button>
+            </form>
+          </ion-col>
+        </ion-card>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
 <ion-content *ngIf="events.length===0">

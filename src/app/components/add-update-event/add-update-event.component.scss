@@ -8,3 +8,6 @@ ion-avatar{
     margin: 0 auto;
     --border-radius: 15%;
 }
+ion-input, ion-textarea{
+    --color: var(--ion-color-secondary);
+}
