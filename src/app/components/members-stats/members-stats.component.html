@@ -28,7 +28,7 @@
           </ion-col>
           <ion-col size="12">
             <form [formGroup]="eventForm" class="ion-padding ion-text-center" >
-              <ion-item class="ion-margin-bottom">
+              <ion-item >
                 <ion-textarea
                   type="text"
                   formControlName="comment"
@@ -54,7 +54,7 @@
   </div>
 </ion-content>
 <ion-content *ngIf="events.length===0">
-  <ion-item>
-    <ion-label>No hay eventos</ion-label>
+  <ion-item class="scale-up-horizontal-center">
+    <ion-label >No hay eventos</ion-label>
   </ion-item>
 </ion-content>

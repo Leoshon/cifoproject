@@ -7,7 +7,6 @@
   
   <ion-list *ngIf="!loading">
     <ion-item-sliding class="event-item" *ngFor="let e of events">
-      <ion-icon  name="arrow-back" slot="end"></ion-icon>
       
       <ion-item class="ion-text-center">
         <ion-avatar>
@@ -22,16 +21,17 @@
           </div>
         </ion-label>
       </ion-item>
-   
+      
+      <ion-icon  name="arrow-back" slot="end"></ion-icon>
       <ion-item-options side="end">
         <ion-item-option color="primary" (click)="addUpdateEvent(e)" expandable>
           <ion-icon class="option-btn" name="create-outline"></ion-icon>
         </ion-item-option>
         <ion-item-option color="danger" expandable>
           <ion-icon
-            class="option-btn"
-            name="trash-outline"
-            (click)="confirmDelete(e)"
+          class="option-btn"
+          name="trash-outline"
+          (click)="confirmDelete(e)"
           ></ion-icon>
         </ion-item-option>
       </ion-item-options>

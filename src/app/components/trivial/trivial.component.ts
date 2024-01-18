@@ -50,7 +50,7 @@ export class TrivialComponent implements OnInit {
       }
     }, 1000);
   }
-   sanitize(txt: string) {
+/*    sanitize(txt: string) {
     txt.replace(/&quot;/g, "\"")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
@@ -60,7 +60,7 @@ export class TrivialComponent implements OnInit {
     .replace(/&eacute;/g, "é")
     .replace(/&aacute;/g, "á")
     return txt;
-  }
+  } */
   async sendRequest() {
   
     this.request = true;
@@ -98,7 +98,7 @@ export class TrivialComponent implements OnInit {
     if (choise == this.results[0].correct_answer) {
       eTarget.target.classList.add('correct');
       this.utilService.presentToast({
-        message: `Enhorabuena ${this.usuario.nombre}! Has ganado 10 centimos!`,
+        message: `Vas bien ${this.usuario.nombre} Has ganado 10 € !`,
         duration: 3000,
         color: 'primary',
         icon: 'happy-outline',
@@ -113,7 +113,7 @@ export class TrivialComponent implements OnInit {
       console.log('incorrect');
       eTarget.target.classList.add('incorrect');
       this.utilService.presentToast({
-        message: `Lo siento ${this.usuario.nombre}! Has perdido 10 centimos!`,
+        message: `Lo siento ${this.usuario.nombre}... Has perdido 10 € ...`,
         duration: 3000,
         color: 'danger',
         icon: 'sad-outline',
