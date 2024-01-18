@@ -25,6 +25,12 @@ export class TrivialComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.usuario);
+    this.utilService.loading().then((load) => {
+      load.present();
+      setTimeout(() => {
+        load.dismiss();
+      }, 2000);
+    });
   }
   setTimer() {
     this.timer = setInterval(() => {

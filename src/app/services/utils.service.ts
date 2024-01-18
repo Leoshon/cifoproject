@@ -23,11 +23,12 @@ export class UtilsService {
       return data;
     }
   }
- async  loading(){
+async loading(){
     return  this.loadingCtrl.create({
       message: 'Cargando...',
       spinner: 'crescent',
       showBackdrop: true,
+      translucent: true,
     });
   }
   async presentToast(opts: ToastOptions) {

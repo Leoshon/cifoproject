@@ -11,99 +11,35 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./formulapage.page.scss'],
 })
 export class FormulapagePage implements OnInit {
- formulaService= inject(FormulaService);
- utilService= inject(UtilsService);
- fireService = inject(FireBaseService);
- datos: any=null;
- results: any=[];
- answers: any=[];
- usuario = {} as User;
- request: boolean = false;
- quizMoney: number = 0;
-  constructor() { }
+  formulaService = inject(FormulaService);
+  utilService = inject(UtilsService);
+  fireService = inject(FireBaseService);
 
-  ngOnInit() {
-    //this.getSeazon();
-    //this.getWeather();
-    
-    
-    
-  }
-  ionViewWillEnter(){
-    
+  datos: any = null;
+  results: any = [];
+  answers: any = [];
+  usuario = {} as User;
+  request: boolean = false;
+  quizMoney: number = 0;
+  constructor() {}
+
+  ngOnInit() {}
+  ionViewWillEnter() {
     this.usuario = this.utilService.getFromLocalStorage('user');
   }
- /*  getSeazon(){
-    this.formulaService.getSeazon().subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    })
-   
-  } */
-  /* sendRequest(){
-    this.request=true;
-      this.formulaService.getRequest().subscribe({
-      next: (data) => {
-        console.log(data);
-        this.datos=data;
-        console.log(this.datos.results);
-        this.results=this.datos.results;
-        this.answers=[...this.results[0].incorrect_answers,this.results[0].correct_answer];
-        console.log(this.answers);
-        this.answers=this.utilService.shaffle(this.answers);
-        console.log(this.answers);
-        
-        
-        
-        
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      
-      
-    })
-   
-  } */
- /* async getChoise(choise:any,eTarget:any){
-    if (choise == this.results[0].correct_answer) {
-      eTarget.target.classList.add("correct");
-      this.utilService.presentToast({
-        message: `Enhorabuena ${this.usuario.nombre}! Has ganado 10 centimos!`,
-        duration: 3000,
-        color: 'primary',
-        icon: 'person-circle-outline',
-        position: 'middle',
-      });
-      if(this.usuario.quizPoints){
-        this.usuario.quizPoints += 10;
-        this.utilService.saveInLocalStorage('user', this.usuario);
-        this.quizMoney = this.usuario.quizPoints/10;
-      }
-      this.fireService.updateUser(this.usuario);
-    } else {
-      console.log("incorrect");
-      eTarget.target.classList.add("incorrect");
-    }
-    const loading = await this.utilService.loading();
-    await loading.present();
-    await loading.dismiss();
-    this.request=false;
-  } */
+
   async goToTrivial() {
+    
     let success = await this.utilService.presentModal({
       component: TrivialComponent,
       componentProps: {
-      usuario: this.usuario,
+        usuario: this.usuario,
       },
     });
+    
     if (success) {
-      console.log("success");
+      console.log('success');
     }
-  } 
+  }
 
 }
