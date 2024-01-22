@@ -20,6 +20,7 @@ export class TrivialComponent implements OnInit {
   answers: any = [];
   request: boolean = false;
   @Input() usuario!: User;
+  
 
   constructor() {}
 
@@ -29,7 +30,7 @@ export class TrivialComponent implements OnInit {
       load.present();
       setTimeout(() => {
         load.dismiss();
-      }, 2000);
+      }, 1000);
     });
   }
   setTimer() {
@@ -133,9 +134,12 @@ export class TrivialComponent implements OnInit {
         this.usuario.quizPoints=0;
         this.utilService.saveInLocalStorage('user', this.usuario);
         this.fireService.updateUser(this.usuario);
+        this.request=true;
+        
       }
     }
 
     this.utilService.dismisModal({ success: true });
   }
+
 }

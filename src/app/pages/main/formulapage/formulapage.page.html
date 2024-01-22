@@ -2,7 +2,7 @@
 
 <ion-content>
   <div class="glass-content">
-    <ion-item>
+    <ion-item *ngIf="request">
       <ion-buttons slot="end">
         <ion-icon name="cash-outline"></ion-icon>
         <ion-button
@@ -10,6 +10,7 @@
           expand="block"
           fill="clear"
           shape="round"
+         
         >
           Go to Quiz
         </ion-button>

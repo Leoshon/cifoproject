@@ -86,7 +86,12 @@ export class AddUpdateEventComponent implements OnInit {
       await this.fireServ
         .addDocument(path, this.eventForm.value)
         .then(async () => {
-          await this.utilsServ.showAlert('Evento agregado', '');
+          await this.utilsServ.showAlert('Evento agregado', `${this.usuario.quizPoints ? '' : 'Ganaste 10 puntos'}`);
+          if (this.usuario && this.usuario.quizPoints==0) {
+            this.usuario.quizPoints = (this.usuario.quizPoints || 0) + 10;
+            this.utilsServ.saveInLocalStorage('user', this.usuario);
+            this.fireServ.updateUser(this.usuario);
+          }
         });
       this.utilsServ.dismisModal({ success: true});
       await loading.dismiss();

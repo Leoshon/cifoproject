@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
 import { TrivialComponent } from 'src/app/components/trivial/trivial.component';
 import { User } from 'src/app/models/user.model';
 import { FireBaseService } from 'src/app/services/firebase.service';
@@ -19,27 +20,56 @@ export class FormulapagePage implements OnInit {
   results: any = [];
   answers: any = [];
   usuario = {} as User;
-  request: boolean = false;
+  request!: boolean;
   quizMoney: number = 0;
   constructor() {}
 
   ngOnInit() {}
   ionViewWillEnter() {
     this.usuario = this.utilService.getFromLocalStorage('user');
-  }
+    console.log(this.usuario.quizPoints);
+    if(this.usuario.quizPoints == 0){
+      this.request = false;
+      this.goToEvents();
+      console.log(this.request);
+    }else{
+      this.request = true;
+      console.log(this.request);
+    }
+    
+}
+async goToEvents() {
+  await this.utilService.presentAlert({
+    header: 'No tienes puntos...',
+    message: 'Crea un evento para ganar 10 puntos',
+    mode: 'ios',
+    buttons: [
+      {
+        text: 'Ok',
+        handler: () => {
+        this.utilService.routerNavigate('/main/home');
+        },
+      },
+    ],
+
+  })
+  
+}
 
   async goToTrivial() {
-    
-    let success = await this.utilService.presentModal({
+    if(this.usuario.quizPoints == 0){
+      this.goToEvents();
+
+    }else{  let success = await this.utilService.presentModal({
       component: TrivialComponent,
       componentProps: {
         usuario: this.usuario,
       },
     });
+  }
     
-    if (success) {
-      console.log('success');
-    }
+  
+
   }
 
 }
