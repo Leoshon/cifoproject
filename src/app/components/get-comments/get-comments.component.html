@@ -1,6 +1,6 @@
 <app-header title="Detalles" [isModal]="true"></app-header>
-<ion-content>
-  <ion-list>
+<ion-content *ngIf="comments">
+  <ion-list >
     <ion-item *ngFor="let c of comments">
       <ion-label>
         <h2>En {{c.date}}</h2>
@@ -10,3 +10,8 @@
     </ion-item>
   </ion-list>
 </ion-content>
+<ion-content *ngIf="comments && !comments.length">
+    <ion-item class="scale-up-horizontal-center">
+      <ion-label >No hay comentarios</ion-label>
+    </ion-item>
+  </ion-content>

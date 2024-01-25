@@ -3,6 +3,7 @@ import { FireBaseService } from '../../../services/firebase.service';
 import { User } from '../../../models/user.model';
 import { UtilsService } from '../../../services/utils.service';
 import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
+import { GetCommentsComponent } from 'src/app/components/get-comments/get-comments.component';
 import { Events } from 'src/app/models/event.model';
 
 @Component({
@@ -113,34 +114,21 @@ export class HomePage {
     let sub = this.firebaseServ.getEvents(path).subscribe({
       next: (events: any) => {
         this.events = events;
-        console.log(this.events);
-        this.loading = false;
-        sub.unsubscribe();
-      },
-    });
-  }
-/*   getAllUsers() {
-    this.firebaseServ.getAllUsers().subscribe({
-      next: (users: any) => {
-        console.log(users);
-        this.members = users.filter((user: any) => user.uid != this.usuario.uid);
-        console.log(this.members);
-
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  } */
-/*   getEventsByUser(uid: string) {
-    let path = `users/${uid}/events`;
-    this.loading = true;
-    let sub = this.firebaseServ.getEvents(path).subscribe({
-      next: (events: any) => {
         console.log(events);
         this.loading = false;
         sub.unsubscribe();
       },
     });
-  } */
+  }
+
+  callModal(id:any){
+    this.utilsServ.presentModal({
+      component: GetCommentsComponent,
+      componentProps: {
+        id: id,
+        uid: this.user().uid,
+      },
+    });
+  }
+
 }

@@ -18,7 +18,7 @@ export class MembersStatsComponent  implements OnInit {
 events: Events[]= [];
 comentar=false;
 formattedDate: string = '';
-comments?: Comments[] =[
+comments: Comments[] =[
   {
     id: '',
     user: '',

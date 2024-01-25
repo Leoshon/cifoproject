@@ -20,6 +20,16 @@
             <p><strong>Precio:</strong>{{e.precio}}</p>
           </div>
         </ion-label>
+        ibuttons
+        <ion-button
+        expand="block"
+        fill="outline"
+        shape="round"
+        slot="end"
+        (click)="callModal(e.id)"
+      >
+        Ver Comentarios
+      </ion-button>
       </ion-item>
       
       <ion-icon  name="arrow-back" slot="end"></ion-icon>
@@ -54,7 +64,7 @@
   </ion-list>
   <div *ngIf="!loading && !events.length" class="empty">
     <ion-icon name="sad-outline"></ion-icon>
-    <p>No events found</p>
+    <p>No hay eventos</p>
   </div>
   <div class="d-flex-center">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

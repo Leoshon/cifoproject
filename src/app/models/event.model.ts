@@ -2,7 +2,7 @@ export interface Events{
     id?:string;
     categoria:string;
     descripcion:string;
-    precio:number;
+    precio?:number;
     pais:string;
     image:string;
     comments?:Comments[];
