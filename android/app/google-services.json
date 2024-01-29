@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "89947718031",
+    "project_id": "didacticfire",
+    "storage_bucket": "didacticfire.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89947718031:android:850db9a952edabb0f18bfa",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ7V7qr425xaCOd2qZVpZkJ3pItzjYb24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
