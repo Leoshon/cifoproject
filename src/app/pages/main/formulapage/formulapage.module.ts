@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { TrivialComponent } from 'src/app/components/trivial/trivial.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormulaService } from 'src/app/services/formula.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FormulaService } from 'src/app/services/formula.service';
     IonicModule,
     FormulapagePageRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule
     
   ],
   exports: [

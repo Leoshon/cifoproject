@@ -10,6 +10,7 @@ import { MainPage } from './main.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormulaService } from 'src/app/services/formula.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -20,7 +21,8 @@ import { FormulaService } from 'src/app/services/formula.service';
     IonicModule,
     MainPageRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule
   ],
   exports: [
     SharedModule,

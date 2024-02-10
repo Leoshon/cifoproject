@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { CustomInputComponent } from './custom-input/custom-input.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -15,12 +16,15 @@ CustomInputComponent],
     HeaderComponent,
     CustomInputComponent,
     ReactiveFormsModule,
+    FormsModule,
+    TranslateModule
   ],
   imports: [
     IonicModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class SharedModule { }

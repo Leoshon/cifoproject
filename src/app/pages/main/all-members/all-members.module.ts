@@ -10,6 +10,7 @@ import { AllMembersPage } from './all-members.page';
 import { MembersStatsComponent } from 'src/app/components/members-stats/members-stats.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { GetCommentsComponent } from 'src/app/components/get-comments/get-comments.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { GetCommentsComponent } from 'src/app/components/get-comments/get-commen
     FormsModule,
     IonicModule,
     AllMembersPageRoutingModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ],
   exports: [IonicModule],
   declarations: [AllMembersPage,MembersStatsComponent,GetCommentsComponent]

@@ -9,6 +9,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UpdateUserNameComponent } from 'src/app/components/update-user-name/update-user-name.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UpdateUserNameComponent } from 'src/app/components/update-user-name/upd
     IonicModule,
     ProfilePageRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
     
   ],
   exports: [IonicModule,ReactiveFormsModule],

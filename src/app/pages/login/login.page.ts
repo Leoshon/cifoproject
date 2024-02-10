@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { UtilsService } from 'src/app/services/utils.service';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModuleService } from 'src/app/services/translate-module.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +13,9 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  translateService = inject(TranslateService);
+  translateModuleService = inject(TranslateModuleService);
+  title = '';
   credentials = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -30,7 +35,11 @@ export class LoginPage implements OnInit {
   get password() {
     return this.credentials.get('password');
   }
-
+  transllateHeader(){
+    this.translateService.get('home').subscribe((text: string) => {
+      this.title = text;
+    });
+  }
   ngOnInit() {}
   async login() {
     const loading = await this.utilsService.loading();

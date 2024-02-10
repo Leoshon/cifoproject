@@ -7,8 +7,19 @@
           <ion-icon name="close-circle-outline" ></ion-icon>
         </ion-button>
       </ion-buttons>
-    <ion-title><strong>{{title}}</strong>
+    <ion-title>
       <div class="usuario">E V E N T B O O K</div>
     </ion-title>
   </ion-toolbar>
+  <ion-item>
+    <ion-select
+label='{{ "language" | translate }}'
+(ionChange)="changeLanguage($event)"
+[value]="currentLanguage"
+>
+  <ion-select-option value="es">Español</ion-select-option>
+  <ion-select-option value="en">English</ion-select-option>
+  <ion-select-option value="ca">Catalá</ion-select-option>
+</ion-select>
+</ion-item>
 </ion-header>

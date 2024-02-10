@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     IonicModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ],
   exports: [IonicModule,ReactiveFormsModule],
   declarations: [HomePage,AddUpdateEventComponent]
