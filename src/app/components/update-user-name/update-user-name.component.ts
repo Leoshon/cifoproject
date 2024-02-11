@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from 'firebase/auth';
-import { FireBaseService } from 'src/app/services/firebase.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import { FireBaseService } from '../../services/firebase.service';
+import { UtilsService } from '../../services/utils.service';
+import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
   selector: 'app-update-user-name',
@@ -16,11 +17,12 @@ export class UpdateUserNameComponent implements OnInit {
   }
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    image: new FormControl('', [Validators.required]),
+    image: new FormControl(''),
   });
   constructor() {}
   utilsServ = inject(UtilsService);
   fireServ = inject(FireBaseService);
+  translate = inject(TranslateModuleService);
   ngOnInit() {
     
   }

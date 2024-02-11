@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertOptions, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
 import { LoadingController, AlertController } from '@ionic/angular';
+import { TranslateModuleService } from './translate-module.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class UtilsService {
   alertCtrl = inject(AlertController);
   toastController = inject(ToastController);
   router = inject(Router);
+  translateModuleService = inject(TranslateModuleService);
   constructor() {}
   async presentModal(opts: ModalOptions) {
     const modal = await this.modalCtrl.create(opts);
@@ -25,7 +27,7 @@ export class UtilsService {
   }
 async loading(){
     return  this.loadingCtrl.create({
-      message: 'Cargando...',
+      message: this.translateModuleService.get('loading'),
       spinner: 'crescent',
       showBackdrop: true,
       translucent: true,
@@ -44,9 +46,9 @@ async loading(){
       allowEditing: true,
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Prompt,
-      promptLabelHeader,
-      promptLabelPhoto: 'Seleccionar foto',
-      promptLabelPicture: 'Tomar foto',
+      promptLabelHeader:this.translateModuleService.get('select_foto'),
+      promptLabelPhoto: this.translateModuleService.get('select_foto'),
+      promptLabelPicture: this.translateModuleService.get('take_foto'),
     });
   }
   async changeImage() {
@@ -55,9 +57,9 @@ async loading(){
       allowEditing: false,
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Prompt,
-      promptLabelHeader: 'Seleccionar foto',
-      promptLabelPhoto: 'Seleccionar foto',
-      promptLabelPicture: 'Tomar foto',
+      promptLabelHeader: this.translateModuleService.get('select_foto'),
+      promptLabelPhoto: this.translateModuleService.get('select_foto'),
+      promptLabelPicture: this.translateModuleService.get('take_foto'),
     });
   }
   saveInLocalStorage(key: string, value: any) {

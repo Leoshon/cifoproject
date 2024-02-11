@@ -1,17 +1,18 @@
 <app-header title="Detalles" [isModal]="true"></app-header>
 <ion-content *ngIf="comments">
-  <ion-list >
+  <ion-list>
     <ion-item *ngFor="let c of comments">
       <ion-label>
-        <h2>En {{c.date}}</h2>
-        <h2>{{ c.user }}</h2>
-        <h2>Ha dicho : {{ c.comment }}</h2>
+        <h2>{{ c.date }}</h2>
+        <h2>{{ c.user }}  {{ "says" | translate }}</h2>
+        <br />
+        <h2>{{ c.comment }}</h2>
       </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
 <ion-content *ngIf="comments && !comments.length">
-    <ion-item class="scale-up-horizontal-center">
-      <ion-label >No hay comentarios</ion-label>
-    </ion-item>
-  </ion-content>
+  <ion-item class="scale-up-horizontal-center">
+    <ion-label>{{ "no_comments" | translate }}</ion-label>
+  </ion-item>
+</ion-content>

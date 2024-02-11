@@ -3,9 +3,9 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilsService } from '../../services/utils.service';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateModuleService } from 'src/app/services/translate-module.service';
+import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,9 @@ import { TranslateModuleService } from 'src/app/services/translate-module.servic
 export class LoginPage implements OnInit {
   translateService = inject(TranslateService);
   translateModuleService = inject(TranslateModuleService);
-  title = '';
+  currentLanguage = '';
+  labelEm = '';
+  labelPass = '';
   credentials = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -35,12 +37,12 @@ export class LoginPage implements OnInit {
   get password() {
     return this.credentials.get('password');
   }
-  transllateHeader(){
-    this.translateService.get('home').subscribe((text: string) => {
-      this.title = text;
-    });
+
+
+  ngOnInit() {
+    this.currentLanguage = this.utilsService.getFromLocalStorage('language');
+    this.currentLanguage ? this.translateModuleService.changeLanguage(this.currentLanguage) : this.translateModuleService.changeLanguage('ca');
   }
-  ngOnInit() {}
   async login() {
     const loading = await this.utilsService.loading();
     await loading.present();
@@ -51,7 +53,7 @@ export class LoginPage implements OnInit {
       })
       .catch((error) => {
         this.utilsService.presentToast({
-          message: 'Usuario o contraseña incorrectos',
+          message: this.translateModuleService.get('access_denied'),
           duration: 3000,
           color: 'primary',
           icon: 'alert-circle-outline',
@@ -70,7 +72,7 @@ export class LoginPage implements OnInit {
         this.utilsService.routerNavigate('/main/home');
         this.credentials.reset();
         this.utilsService.presentToast({
-          message: 'Bienvenido' + ' ' + user.nombre,
+          message: this.translateModuleService.get('wellcome') + ' ' + user.nombre,
           duration: 2000,
           color: 'primary',
           icon: 'person-circle-outline',

@@ -8,14 +8,14 @@
     <ion-buttons class="ion-text-center">
       <ion-button [disabled]="request" (click)="sendRequest()">
         <ion-icon slot="start" name="send"></ion-icon>
-        Request a question
+        {{"req_question" | translate}}
       </ion-button>
     </ion-buttons>
   </ion-item>
   <ion-row *ngIf="request">
     <ion-col size="12" style="text-align: center">
       <ion-label style="color: gold; font-family: 'fantasy'; font-size: 25px;">
-        Time Left
+        {{ "time" | translate}}
       </ion-label>
 
       <div class="timer">

@@ -1,8 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { User } from 'src/app/models/user.model';
-import { FireBaseService } from 'src/app/services/firebase.service';
-import { UtilsService } from 'src/app/services/utils.service';
-import { UpdateUserNameComponent } from 'src/app/components/update-user-name/update-user-name.component';
+import { FireBaseService } from '../../../services/firebase.service';
+import { UtilsService } from '../../../services/utils.service';
+import { UpdateUserNameComponent } from '../../../components/update-user-name/update-user-name.component';
+import  { TranslateModuleService } from '../../../services/translate-module.service';
+
+
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +15,7 @@ import { UpdateUserNameComponent } from 'src/app/components/update-user-name/upd
 export class ProfilePage implements OnInit {
   utilsServ = inject(UtilsService);
   fireServ = inject(FireBaseService);
+  translate = inject(TranslateModuleService);
   usuario!: User;
   constructor() { }
 

@@ -13,7 +13,7 @@
       <ion-input
         type="text"
         formControlName="categoria"
-        label="Categoria"
+        [label]="translate.get('category')"
         label-placement="floating"
         autocomplete="autocomplete"
       ></ion-input>
@@ -27,7 +27,7 @@
       <ion-textarea
         type="text"
         formControlName="descripcion"
-        label="Descripcion"
+        [label]="translate.get('description')"
         label-placement="floating"
       ></ion-textarea>
       <ion-note
@@ -42,7 +42,7 @@
       <ion-input
         type="number"
         formControlName="precio"
-        label="Precio"
+        [label]="translate.get('price')"
         label-placement="floating"
       ></ion-input>
     </ion-item>
@@ -50,13 +50,15 @@
       <ion-input
         type="text"
         formControlName="pais"
-        label="País"
+        [label]="translate.get('country')"
         label-placement="floating"
       ></ion-input>
     </ion-item>
-    <ion-button type="submit"  mode="ios" class="ion-margin" [disabled]="eventForm.invalid">
-      {{evento ? 'Update' : 'Add'}}
-      <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+    <ion-button (click)="submitEvent()" class="ion-margin" mode="ios" [disabled]="!eventForm.valid" shape="round" *ngIf="!evento">
+      {{ "save" | translate }}
+    </ion-button>
+    <ion-button (click)="submitEvent()" class="ion-margin" mode="ios" [disabled]="!eventForm.valid" shape="round" *ngIf="evento">
+      {{ "edit" | translate }}
     </ion-button>
   </form>
 </ion-content>

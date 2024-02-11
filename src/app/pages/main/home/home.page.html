@@ -13,11 +13,11 @@
           <img [src]="e.image" />
         </ion-avatar>
         <ion-label>
-          <div class="name"><strong>Categoria: </strong>{{e.categoria}}</div>
+          <div class="name"><strong>{{"category" | translate}}: </strong>{{e.categoria}}</div>
           <div class="data">
-            <p><strong>Pais: </strong>{{e.pais}}</p>
-            <p><strong>Descripción: </strong>{{e.descripcion}}</p>
-            <p><strong>Precio:</strong>{{e.precio}}</p>
+            <p><strong>{{"country" | translate }}: </strong>{{e.pais}}</p>
+            <p><strong>{{"description" | translate }}: </strong>{{e.descripcion}}</p>
+            <p><strong>{{"price" | translate }}: </strong>{{e.precio}}</p>
           </div>
         </ion-label>
         
@@ -28,7 +28,7 @@
         slot="end"
         (click)="callModal(e.id)"
       >
-        Ver Comentarios
+        {{ "see_comment" | translate }}
       </ion-button>
       </ion-item>
       

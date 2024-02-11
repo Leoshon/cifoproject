@@ -4,6 +4,7 @@ import { FireBaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service'
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
+import { TranslateModuleService } from 'src/app/services/translate-module.service';
 
 @Component({
   selector: 'app-main',
@@ -14,6 +15,22 @@ export class MainPage implements OnInit {
   firebaseServ= inject(FireBaseService);
   utilsServ= inject(UtilsService);
   authService= inject(AuthService);
+  translateModuleService= inject(TranslateModuleService);
+  translateTitles(title: string) {
+    switch (title) {
+      case 'Home':
+        return this.translateModuleService.get('home');
+      case 'Profile':
+        return this.translateModuleService.get('profile');
+      case 'Quiz':
+        return this.translateModuleService.get('quiz');
+      case 'Otros':
+        return this.translateModuleService.get('others');
+      default:
+        return title;
+    
+    }
+  }
   pages = [
     {
       title: 'Home',

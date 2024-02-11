@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user.model';
 import { FireBaseService } from 'src/app/services/firebase.service';
 import { FormulaService } from 'src/app/services/formula.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { TranslateModuleService } from '../../../services/translate-module.service';
 
 @Component({
   selector: 'app-formulapage',
@@ -15,6 +16,7 @@ export class FormulapagePage implements OnInit {
   formulaService = inject(FormulaService);
   utilService = inject(UtilsService);
   fireService = inject(FireBaseService);
+  translate= inject(TranslateModuleService);
 
   datos: any = null;
   results: any = [];
@@ -40,8 +42,8 @@ export class FormulapagePage implements OnInit {
 }
 async goToEvents() {
   await this.utilService.presentAlert({
-    header: 'No tienes puntos...',
-    message: 'Crea un evento para ganar 10 puntos',
+    header: this.translate.get('no_points'),
+    message: this.translate.get('create_event'),
     mode: 'ios',
     buttons: [
       {

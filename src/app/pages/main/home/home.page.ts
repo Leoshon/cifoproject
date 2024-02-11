@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FireBaseService } from '../../../services/firebase.service';
 import { User } from '../../../models/user.model';
 import { UtilsService } from '../../../services/utils.service';
 import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
 import { GetCommentsComponent } from 'src/app/components/get-comments/get-comments.component';
-import { Events } from 'src/app/models/event.model';
+import { Events } from '../../../models/event.model';
+import { TranslateModuleService } from '../../../services/translate-module.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomePage {
   events: Events[] = [];
   loading: boolean = false;
   members: any[] = [];
+  translate = inject(TranslateModuleService);
   constructor(
     private utilsServ: UtilsService,
     private firebaseServ: FireBaseService,
@@ -78,7 +80,7 @@ export class HomePage {
       let imagePath = await this.firebaseServ.getImgFilePath(evento.image);
       await this.firebaseServ.deleteFile(imagePath);
       await this.firebaseServ.deleteEvent(path, evento).then(async () => {
-        await this.utilsServ.showAlert('Evento eliminado', '');
+        await this.utilsServ.showAlert(this.translate.get('deleted'), '');
       });
       await loading.dismiss();
     } catch (error) {
@@ -90,16 +92,16 @@ export class HomePage {
   }
   async confirmDelete(evento: Events) {
     await this.utilsServ.presentAlert({
-      header: 'Confirmar',
-      message: '¿Desea eliminar el evento?',
+      header: this.translate.get('confirm'),
+      message: this.translate.get('sure'),
       mode: 'ios',
       buttons: [
         {
-          text: 'No',
+          text: this.translate.get('no'),
           role: 'cancel',
         },
         {
-          text: 'Si',
+          text: this.translate.get('yes'),
           handler: () => {
             this.deleteEvent(evento);
           },

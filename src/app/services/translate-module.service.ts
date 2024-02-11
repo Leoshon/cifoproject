@@ -15,4 +15,11 @@ export class TranslateModuleService {
   public getLanguage(): string{
     return this.translateModuleService.currentLang;
   }
+  public get(key: string): string {
+    let value = '';
+    this.translateModuleService.get(key).subscribe((text: string) => {
+      value = text;
+    });
+    return value;
+  }
 }

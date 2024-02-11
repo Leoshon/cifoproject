@@ -4,6 +4,7 @@ import { Comments, Events } from 'src/app/models/event.model';
 import { User } from 'src/app/models/user.model';
 import { FireBaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
   selector: 'app-get-comments',
@@ -13,6 +14,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class GetCommentsComponent implements OnInit {
   firebaseServ = inject(FireBaseService);
   utilsServ = inject(UtilsService);
+  translate = inject(TranslateModuleService);
   @Input() id: any;
   @Input() uid: any;
 

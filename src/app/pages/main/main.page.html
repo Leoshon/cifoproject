@@ -15,7 +15,7 @@
         detail
       >
         <ion-icon slot="start" [name]="p.icon"></ion-icon>
-        <ion-label>{{p.title}}</ion-label>
+        <ion-label>{{translateTitles(p.title)}}</ion-label>
       </ion-item>
     </ion-menu-toggle>
   </ion-content>
@@ -23,7 +23,7 @@
     <ion-menu-toggle auto-hide="false" (click)="logOut()">
       <ion-item lines="none">
         <ion-icon slot="start" name="log-out-outline"></ion-icon>
-        <ion-label>Cerrar sesión</ion-label>
+        <ion-label>{{"logout" | translate}}</ion-label>
       </ion-item>
   </ion-menu-toggle>
   </ion-footer>

@@ -10,21 +10,21 @@
     </ion-button>
     <app-custom-input
       [controlName]="form.controls.name"
-      label="Nombre"
+      [label]="translate.get('name')"
       type="text"
       icon="person-outline"
     >
     </app-custom-input>
     <div class="validatros" *ngIf="form.controls.name.errors && form.controls.name.touched">
       <div class="error-message" *ngIf="form.controls.name.errors?.['required']">
-        Nombre es requerido
+        {{ "name_required" | translate }}
       </div>
       <div class="error-message" *ngIf="form.controls.name.errors?.['minlength']">
-        Nombre debe tener al menos 2 caracteres
+        {{ "name_invalid" | translate }}
       </div>
     </div>
     <ion-button mode="ios" class="ion-margin" shape="round" type="submit" [disabled]="form.invalid">
-      Actualizar
+      {{ "save" | translate}}
       <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
     </ion-button>
   </form>

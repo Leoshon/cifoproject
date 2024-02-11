@@ -11,7 +11,7 @@
         icon="mail-outline"
         type="email"
         [controlName]="credentials.controls.email"
-        label="Correo"
+        [label]="translateModuleService.get('email')"
         autocomplete="autocomplete"
       ></app-custom-input>
       <div
@@ -29,7 +29,7 @@
         icon="lock-closed-outline"
         type="password"
         [controlName]="credentials.controls.password"
-        label="Password"
+        [label]="translateModuleService.get('password')"
       ></app-custom-input>
       <div
         class="validators"

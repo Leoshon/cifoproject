@@ -5,6 +5,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { User } from 'src/app/models/user.model';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { Events } from 'src/app/models/event.model';
+import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
   selector: 'app-add-update-event',
@@ -16,6 +17,7 @@ export class AddUpdateEventComponent implements OnInit {
   fireServ = inject(FireBaseService);
   loadCtrl = inject(LoadingController);
   alertCtrl = inject(AlertController);
+  translate = inject(TranslateModuleService);
   eventForm!: FormGroup;
   usuario = {} as User;
   @Input() evento?: Events;
@@ -58,7 +60,7 @@ export class AddUpdateEventComponent implements OnInit {
     await this.utilsServ.dismisModal();
   }
   async takePhoto() {
-    const dataUrl = (await this.utilsServ.takePhoto('Agregar foto')).dataUrl;
+    const dataUrl = (await this.utilsServ.takePhoto('')).dataUrl;
     this.eventForm.get('image')?.setValue(dataUrl);
   }
   async submitEvent() {
@@ -86,7 +88,7 @@ export class AddUpdateEventComponent implements OnInit {
       await this.fireServ
         .addDocument(path, this.eventForm.value)
         .then(async () => {
-          await this.utilsServ.showAlert('Evento agregado', `${this.usuario.quizPoints ? '' : 'Ganaste 10 puntos'}`);
+          await this.utilsServ.showAlert(this.translate.get('added'), `${this.usuario && this.usuario.quizPoints ? '' : this.translate.get('won')}`);
           if (this.usuario && this.usuario.quizPoints==0) {
             this.usuario.quizPoints = (this.usuario.quizPoints || 0) + 10;
             this.utilsServ.saveInLocalStorage('user', this.usuario);
@@ -119,7 +121,7 @@ export class AddUpdateEventComponent implements OnInit {
       await this.fireServ
         .updateEvent(path, this.eventForm.value)
         .then(async () => {
-          await this.utilsServ.showAlert('Evento modfifcado', '');
+          await this.utilsServ.showAlert(this.translate.get('updated'), '');
         });
       this.utilsServ.dismisModal({ success: true});
       await loading.dismiss();
@@ -127,13 +129,6 @@ export class AddUpdateEventComponent implements OnInit {
       console.log(error);
     }
   }
-/*   async showAlert(message: string) {
-    const alert = await this.alertCtrl.create({
-      header: '',
-      message,
-      buttons: ['OK'],
-    });
-    await alert.present();
-  } */
+
 }
-//await addDoc(collection(this.firestore,`users/${user?.uid}/events`), {imageUrl});
+
