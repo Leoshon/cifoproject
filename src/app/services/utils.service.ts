@@ -1,7 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AlertOptions, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
+import {
+  AlertOptions,
+  ModalController,
+  ModalOptions,
+  ToastController,
+  ToastOptions,
+} from '@ionic/angular';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { TranslateModuleService } from './translate-module.service';
 
@@ -21,12 +27,11 @@ export class UtilsService {
     await modal.present();
     const { data } = await modal.onWillDismiss();
     if (data) {
-      console.log(data);
       return data;
     }
   }
-async loading(){
-    return  this.loadingCtrl.create({
+  async loading() {
+    return this.loadingCtrl.create({
       message: this.translateModuleService.get('loading'),
       spinner: 'crescent',
       showBackdrop: true,
@@ -46,13 +51,13 @@ async loading(){
       allowEditing: true,
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Prompt,
-      promptLabelHeader:this.translateModuleService.get('select_foto'),
+      promptLabelHeader: this.translateModuleService.get('select_foto'),
       promptLabelPhoto: this.translateModuleService.get('select_foto'),
       promptLabelPicture: this.translateModuleService.get('take_foto'),
     });
   }
   async changeImage() {
-   return await Camera.getPhoto({
+    return await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.DataUrl,
@@ -71,7 +76,7 @@ async loading(){
   clearLocalStorage() {
     localStorage.clear();
   }
-  async showAlert(message: string,header: string) {
+  async showAlert(message: string, header: string) {
     const alert = await this.alertCtrl.create({
       header,
       message,
@@ -79,7 +84,7 @@ async loading(){
     });
     await alert.present();
   }
-  async presentAlert(opts: AlertOptions){
+  async presentAlert(opts: AlertOptions) {
     const alert = await this.alertCtrl.create(opts);
     await alert.present();
   }

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { User } from 'firebase/auth';
 import { FireBaseService } from '../../services/firebase.service';
 import { UtilsService } from '../../services/utils.service';
 import { TranslateModuleService } from '../../services/translate-module.service';
@@ -23,9 +22,7 @@ export class UpdateUserNameComponent implements OnInit {
   utilsServ = inject(UtilsService);
   fireServ = inject(FireBaseService);
   translate = inject(TranslateModuleService);
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
   async closeModal() {
     await this.utilsServ.dismisModal();
   }
@@ -41,13 +38,12 @@ export class UpdateUserNameComponent implements OnInit {
     await loading.present();
     this.usuario.nombre = this.form.controls.name.value;
     this.usuario.imageUrl = this.form.controls.image.value;
-    console.log(this.usuario);
     const result = await this.fireServ
       .updateUser(this.usuario)
       .then(async () => {
         await this.utilsServ.showAlert('Usuario actualizado', '');
       });
-      await loading.dismiss();
+    await loading.dismiss();
     this.utilsServ.saveInLocalStorage('user', this.usuario);
     await this.utilsServ.dismisModal({ success: true });
   }

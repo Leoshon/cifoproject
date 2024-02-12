@@ -5,8 +5,8 @@ import { FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { AddUpdateEventComponent } from '../../../components/add-update-event/add-update-event.component';
+import { SharedModule } from '../../../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 

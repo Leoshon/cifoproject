@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { FireBaseService } from 'src/app/services/firebase.service';
-import { UtilsService } from 'src/app/services/utils.service';
-import { FormulaService } from 'src/app/services/formula.service';
-import { User } from 'src/app/models/user.model';
+import { FireBaseService } from '../../services/firebase.service';
+import { UtilsService } from '../../services/utils.service';
+import { FormulaService } from '../../services/formula.service';
+import { User } from '../../models/user.model';
 import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
@@ -26,7 +26,6 @@ export class TrivialComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.usuario);
     this.utilService.loading().then((load) => {
       load.present();
       setTimeout(() => {
@@ -74,9 +73,8 @@ export class TrivialComponent implements OnInit {
     this.setTimer();
     this.formulaService.getRequest().subscribe({
       next: (data) => {
-        console.log(data);
         this.datos = data;
-        console.log(this.datos.results);
+
         this.datos.results[0].question = this.datos.results[0].question
           .replace(/&quot;/g, '"')
           .replace(/&amp;/g, '&')
@@ -108,8 +106,6 @@ export class TrivialComponent implements OnInit {
         }
         console.log(this.datos.results[0].question);
         this.results = this.datos.results;
-        console.log(this.results[0].question);
-        //this.results[0].question =  this.sanitize(this.results[0].question);
 
         this.answers = [
           ...this.results[0].incorrect_answers,
@@ -117,7 +113,6 @@ export class TrivialComponent implements OnInit {
         ];
 
         this.answers = this.utilService.shaffle(this.answers);
-        console.log(this.answers);
       },
       error: (error) => {
         console.log(error);
@@ -129,7 +124,7 @@ export class TrivialComponent implements OnInit {
     if (choise == this.results[0].correct_answer) {
       eTarget.target.classList.add('correct');
       this.utilService.presentToast({
-        message:  this.usuario.nombre + ' ' + this.translate.get('won'),
+        message: this.usuario.nombre + ' ' + this.translate.get('won'),
         duration: 3000,
         color: 'primary',
         icon: 'happy-outline',
@@ -141,7 +136,6 @@ export class TrivialComponent implements OnInit {
         this.fireService.updateUser(this.usuario);
       }
     } else {
-      console.log('incorrect');
       eTarget.target.classList.add('incorrect');
       this.utilService.presentToast({
         message: this.translate.get('lost') + ' ' + this.usuario.nombre,

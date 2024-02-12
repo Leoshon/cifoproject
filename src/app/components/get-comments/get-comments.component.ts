@@ -1,9 +1,9 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit, Inject, inject, Input } from '@angular/core';
-import { Comments, Events } from 'src/app/models/event.model';
-import { User } from 'src/app/models/user.model';
-import { FireBaseService } from 'src/app/services/firebase.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import { Comments, Events } from '../../models/event.model';
+import { User } from '../../models/user.model';
+import { FireBaseService } from '../../services/firebase.service';
+import { UtilsService } from '../../services/utils.service';
 import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
@@ -29,7 +29,6 @@ export class GetCommentsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.id);
     this.getComments(this.id);
   }
 
@@ -48,7 +47,7 @@ export class GetCommentsComponent implements OnInit {
         this.comments = comments;
 
         sub.unsubscribe();
-      }
+      },
     });
   }
 }

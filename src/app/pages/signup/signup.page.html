@@ -3,56 +3,89 @@
   <div class="d-flex-center">
     <form [formGroup]="credentials" (ngSubmit)="signUp()" class="auth-form">
       <app-custom-input
-      autocomplete="email"
-      [controlName]="credentials.controls.email"
-      label="Email"
-      type="email"
-      icon="mail-outline"
-    >
-    </app-custom-input>
-    <div class="validators" *ngIf="credentials.controls.email && credentials.controls.email.touched">
-      <div class="error-message" *ngIf="credentials.controls.email.errors?.['required']">
-        Email is required
+        autocomplete="email"
+        [controlName]="credentials.controls.email"
+        [label]="translate.get('email')"
+        type="email"
+        icon="mail-outline"
+      >
+      </app-custom-input>
+      <div
+        class="validators"
+        *ngIf="credentials.controls.email && credentials.controls.email.touched"
+      >
+        <div
+          class="error-message"
+          *ngIf="credentials.controls.email.errors?.['required']"
+        >
+          {{"email_required" | translate}}
+        </div>
+        <div
+          class="error-message"
+          *ngIf="credentials.controls.email.errors?.['email']"
+        >
+          {{"email_invalid" | translate}}
+        </div>
       </div>
-      <div class="error-message" *ngIf="credentials.controls.email.errors?.['email']">
-        Email is invalid
+      <app-custom-input
+        autocomplete="name"
+        [controlName]="credentials.controls.name"
+        [label]="translate.get('name')"
+        type="text"
+        icon="person-outline"
+      >
+      </app-custom-input>
+      <div
+        class="validators"
+        *ngIf="credentials.controls.name && credentials.controls.name.touched"
+      >
+        <div
+          class="error-message"
+          *ngIf="credentials.controls.name.errors?.['required']"
+        >
+          {{"name_required" | translate}}
+        </div>
+        <div
+          class="error-message"
+          *ngIf="credentials.controls.name.errors?.['minlength']"
+        >
+          {{"name_invalid" | translate}}
+        </div>
       </div>
-    </div>
-    <app-custom-input
-    autocomplete="name"
-    [controlName]="credentials.controls.name"
-    label="Name "
-    type="text"
-    icon="person-outline"
-  >
-  </app-custom-input>
-  <div class="validators" *ngIf="credentials.controls.name && credentials.controls.name.touched">
-    <div class="error-message" *ngIf="credentials.controls.name.errors?.['required']">
-      Name is required
-    </div>
-    <div class="error-message" *ngIf="credentials.controls.name.errors?.['minlength']">
-      Name must be at least 3 characters
-    </div>
-  </div>
-    <app-custom-input
-      [controlName]="credentials.controls.password"
-      label="Password"
-      type="password"
-      icon="lock-closed-outline"
-    >
-    </app-custom-input>
-    <div class="validators" *ngIf="credentials.controls.password && credentials.controls.password.touched">
-      <div class="error-message" *ngIf="credentials.controls.password.errors?.['required']">
-        Password is required
+      <app-custom-input
+        [controlName]="credentials.controls.password"
+        [label]="translate.get('password')"
+        type="password"
+        icon="lock-closed-outline"
+      >
+      </app-custom-input>
+      <div
+        class="validators"
+        *ngIf="credentials.controls.password && credentials.controls.password.touched"
+      >
+        <div
+          class="error-message"
+          *ngIf="credentials.controls.password.errors?.['required']"
+        >
+          {{"password_required" | translate}}
+        </div>
+        <div
+          class="error-message"
+          *ngIf="credentials.controls.password.errors?.['minlength']"
+        >
+          {{"password_invalid" | translate}}
+        </div>
       </div>
-      <div class="error-message" *ngIf="credentials.controls.password.errors?.['minlength']">
-        Password must be at least 6 characters
-      </div>
-    </div>
-   
-    <ion-button type="submit" expand="block" mode="ios" shape="round" [disabled]="credentials.invalid">
-      SignUp
-    </ion-button>
+
+      <ion-button
+        type="submit"
+        expand="block"
+        mode="ios"
+        shape="round"
+        [disabled]="credentials.invalid"
+      >
+        SignUp
+      </ion-button>
     </form>
   </div>
 </ion-content>

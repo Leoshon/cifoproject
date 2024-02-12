@@ -2,8 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FireBaseService } from '../../../services/firebase.service';
 import { User } from '../../../models/user.model';
 import { UtilsService } from '../../../services/utils.service';
-import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
-import { GetCommentsComponent } from 'src/app/components/get-comments/get-comments.component';
+import { AddUpdateEventComponent } from '../../../components/add-update-event/add-update-event.component';
+import { GetCommentsComponent } from '../../../components/get-comments/get-comments.component';
 import { Events } from '../../../models/event.model';
 import { TranslateModuleService } from '../../../services/translate-module.service';
 
@@ -84,7 +84,6 @@ export class HomePage {
       });
       await loading.dismiss();
     } catch (error) {
-      console.log(error);
       this.utilsServ.showAlert('Error', 'Error eliminando el evento');
     } finally {
       this.getEvents();
@@ -110,13 +109,11 @@ export class HomePage {
     });
   }
   getEvents() {
-    console.log(this.user().uid);
     let path = `users/${this.user().uid}/events`;
     this.loading = true;
     let sub = this.firebaseServ.getEvents(path).subscribe({
       next: (events: any) => {
         this.events = events;
-        console.log(events);
         this.loading = false;
         sub.unsubscribe();
       },

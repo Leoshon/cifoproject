@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TranslateModuleService } from 'src/app/services/translate-module.service';
+import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
   selector: 'app-custom-input',

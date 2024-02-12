@@ -13,7 +13,6 @@ import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
   providedIn: 'root',
 })
 export class AuthService {
-
   constructor(private auth: Auth) {}
 
   async login(usuario: User) {
@@ -22,7 +21,6 @@ export class AuthService {
       usuario.email,
       usuario.password
     );
-
   }
 
   async register(usuario: User) {
@@ -38,7 +36,7 @@ export class AuthService {
       displayName: usuario.nombre,
     });
   }
-  
+
   setDocument(path: string, data: any) {
     return setDoc(doc(getFirestore(), path), data);
   }

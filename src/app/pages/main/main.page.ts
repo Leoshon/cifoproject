@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FireBaseService } from 'src/app/services/firebase.service';
-import { UtilsService } from 'src/app/services/utils.service'
-import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user.model';
-import { TranslateModuleService } from 'src/app/services/translate-module.service';
+import { FireBaseService } from '../../services/firebase.service';
+import { UtilsService } from '../../services/utils.service';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
+import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
   selector: 'app-main',
@@ -12,10 +12,10 @@ import { TranslateModuleService } from 'src/app/services/translate-module.servic
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
-  firebaseServ= inject(FireBaseService);
-  utilsServ= inject(UtilsService);
-  authService= inject(AuthService);
-  translateModuleService= inject(TranslateModuleService);
+  firebaseServ = inject(FireBaseService);
+  utilsServ = inject(UtilsService);
+  authService = inject(AuthService);
+  translateModuleService = inject(TranslateModuleService);
   translateTitles(title: string) {
     switch (title) {
       case 'Home':
@@ -28,38 +28,37 @@ export class MainPage implements OnInit {
         return this.translateModuleService.get('others');
       default:
         return title;
-    
     }
   }
   pages = [
     {
       title: 'Home',
       url: '/main/home',
-      icon: 'home'
+      icon: 'home',
     },
     {
       title: 'Profile',
       url: '/main/profile',
-      icon: 'person'
+      icon: 'person',
     },
     {
       title: 'Quiz',
       url: '/main/formulapage',
-      icon: 'cash'
+      icon: 'cash',
     },
     {
       title: 'Otros',
       url: '/main/all-members',
-      icon: 'people-outline'
+      icon: 'people-outline',
     },
-  ]
+  ];
   router = inject(Router);
   currentPath: string = '';
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    this.router.events.subscribe((event:any) => {
-      if(event?.url) {
+    this.router.events.subscribe((event: any) => {
+      if (event?.url) {
         this.currentPath = event.url;
       }
     });
@@ -70,8 +69,5 @@ export class MainPage implements OnInit {
   async logOut() {
     await this.authService.logout();
     this.utilsServ.routerNavigate('/login');
-    
   }
-
-
 }

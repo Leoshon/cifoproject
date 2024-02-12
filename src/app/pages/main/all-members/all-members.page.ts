@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FireBaseService } from '../../../services/firebase.service';
 import { User } from '../../../models/user.model';
 import { UtilsService } from '../../../services/utils.service';
-import { Events } from 'src/app/models/event.model';
-import { MembersStatsComponent } from 'src/app/components/members-stats/members-stats.component';
+import { Events } from '../../../models/event.model';
+import { MembersStatsComponent } from '../../../components/members-stats/members-stats.component';
+import { TranslateModuleService } from '../../../services/translate-module.service';
 
 @Component({
   selector: 'app-all-members',
@@ -18,15 +19,14 @@ export class AllMembersPage implements OnInit {
   events: Events[] = [];
   loading: boolean = false;
   members: any[] = [];
+  translate = inject(TranslateModuleService);
 
   constructor(
     private utilsServ: UtilsService,
-    private firebaseServ: FireBaseService,
-  ) { }
+    private firebaseServ: FireBaseService
+  ) {}
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
   ionViewWillEnter() {
     this.usuario = this.utilsServ.getFromLocalStorage('user');
     this.getAllUsers();
@@ -40,10 +40,9 @@ export class AllMembersPage implements OnInit {
   getAllUsers() {
     this.firebaseServ.getAllUsers().subscribe({
       next: (users: any) => {
-        console.log(users);
-        this.members = users.filter((user: any) => user.uid != this.usuario.uid);
-        console.log(this.members);
-       
+        this.members = users.filter(
+          (user: any) => user.uid != this.usuario.uid
+        );
       },
       error: (error) => {
         console.log(error);

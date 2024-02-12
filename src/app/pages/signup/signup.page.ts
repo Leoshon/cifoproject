@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { UtilsService } from '../../services/utils.service';
+import { TranslateModuleService } from '../../services/translate-module.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+  translate = inject(TranslateModuleService);
   credentials = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -35,8 +37,7 @@ export class SignupPage implements OnInit {
     return this.credentials.get('name');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   async signUp() {
     if (this.credentials.valid) {
       const loading = await this.utilsService.loading();
@@ -45,12 +46,11 @@ export class SignupPage implements OnInit {
         .register(this.credentials.value as User)
         .then(async (res) => {
           await this.authservice.updateUser(this.credentials.value as User);
-          console.log(res?.user?.uid);
           this.credentials.value.uid = res?.user?.uid;
           await this.setUserInfo(this.credentials.value.uid as string);
           this.utilsService.showAlert(
-            'Bienvenido',
-            `${this.credentials.value.name}`
+            this.translate.get('Welcome') + ' ' + this.credentials.value.name,
+            ''
           );
         })
         .catch((err) => {
@@ -67,7 +67,6 @@ export class SignupPage implements OnInit {
     }
   }
 
-
   async setUserInfo(uid: string) {
     if (this.credentials.valid) {
       const loading = await this.utilsService.loading();
@@ -76,6 +75,7 @@ export class SignupPage implements OnInit {
         .setDocument(`users/${uid}`, {
           nombre: this.credentials.value.name,
           email: this.credentials.value.email,
+          quizPoints: 0,
           uid: uid,
         })
         .then(async (res) => {
@@ -92,5 +92,4 @@ export class SignupPage implements OnInit {
         });
     }
   }
- 
 }

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FireBaseService } from 'src/app/services/firebase.service';
-import { UtilsService } from 'src/app/services/utils.service';
-import { User } from 'src/app/models/user.model';
+import { FireBaseService } from '../../services/firebase.service';
+import { UtilsService } from '../../services/utils.service';
+import { User } from '../../models/user.model';
 import { LoadingController, AlertController } from '@ionic/angular';
-import { Events } from 'src/app/models/event.model';
+import { Events } from '../../models/event.model';
 import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
@@ -22,10 +22,7 @@ export class AddUpdateEventComponent implements OnInit {
   usuario = {} as User;
   @Input() evento?: Events;
 
-  constructor(
-    private fb: FormBuilder,
-    
-  ) {}
+  constructor(private fb: FormBuilder) {}
   get categoria() {
     return this.eventForm.get('categoria');
   }
@@ -46,7 +43,6 @@ export class AddUpdateEventComponent implements OnInit {
       id: [''],
       categoria: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', [Validators.required, Validators.minLength(3)]],
-      precio: [null, [Validators.required, Validators.min(0)]],
       pais: ['', [Validators.required, Validators.minLength(2)]],
       image: ['', [Validators.required]],
     });
@@ -79,23 +75,27 @@ export class AddUpdateEventComponent implements OnInit {
     try {
       let dataUrl = this.eventForm.get('image')?.value;
       const imagePath = `${this.usuario.uid}/${Date.now()}`;
-      const imageUrl = await this.fireServ.uploadEventImage(
-        imagePath,
-        dataUrl
-      );
+      const imageUrl = await this.fireServ.uploadEventImage(imagePath, dataUrl);
       this.eventForm.get('image')?.setValue(imageUrl);
       delete this.eventForm.value.id;
       await this.fireServ
         .addDocument(path, this.eventForm.value)
         .then(async () => {
-          await this.utilsServ.showAlert(this.translate.get('added'), `${this.usuario && this.usuario.quizPoints ? '' : this.translate.get('won')}`);
-          if (this.usuario && this.usuario.quizPoints==0) {
+          await this.utilsServ.showAlert(
+            this.translate.get('added'),
+            `${
+              this.usuario && this.usuario.quizPoints
+                ? ''
+                : this.translate.get('won')
+            }`
+          );
+          if (this.usuario && this.usuario.quizPoints == 0) {
             this.usuario.quizPoints = (this.usuario.quizPoints || 0) + 10;
             this.utilsServ.saveInLocalStorage('user', this.usuario);
             this.fireServ.updateUser(this.usuario);
           }
         });
-      this.utilsServ.dismisModal({ success: true});
+      this.utilsServ.dismisModal({ success: true });
       await loading.dismiss();
     } catch (error) {
       console.log(error);
@@ -123,12 +123,10 @@ export class AddUpdateEventComponent implements OnInit {
         .then(async () => {
           await this.utilsServ.showAlert(this.translate.get('updated'), '');
         });
-      this.utilsServ.dismisModal({ success: true});
+      this.utilsServ.dismisModal({ success: true });
       await loading.dismiss();
     } catch (error) {
       console.log(error);
     }
   }
-
 }
-

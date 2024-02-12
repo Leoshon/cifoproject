@@ -26,134 +26,130 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 ion-content {
-    --ion-background-color: url(/assets/img/startBackground.png);
-    --color: white;
+  --ion-background-color: url(/assets/img/startBackground.png);
+  --color: white;
 }
 ion-button {
-    text-transform: none;
+  text-transform: none;
 }
 
 // safe padding for ios
-.safe-p-bottom{
-    padding-bottom: constant(safe-area-inset-bottom); // for ios 13+
-    padding-bottom: env(safe-area-inset-bottom); // for previous ios versions
+.safe-p-bottom {
+  padding-bottom: constant(safe-area-inset-bottom); // for ios 13+
+  padding-bottom: env(safe-area-inset-bottom); // for previous ios versions
 }
 
 .submit {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .empty {
-    text-align: center;
-    padding: 60px;
-    opacity: 30%;
+  text-align: center;
+  padding: 60px;
+  opacity: 30%;
 
-    ion-icon {
-        font-size: 100px;
-    }
+  ion-icon {
+    font-size: 100px;
+  }
 }
 
 .d-flex-center {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
 }
 
-
 .custom-input {
-    --border-color: #e0e0e0;
-    --border-radius: 15px;
-    --border-style: solid;
-    --border-width: 1px;
-    margin: 20px 0;
+  --border-color: #e0e0e0;
+  --border-radius: 15px;
+  --border-style: solid;
+  --border-width: 1px;
+  margin: 20px 0;
 
-    ion-label {
-        position: relative;
-        bottom: 2px;
-        color: gold;
-    }
+  ion-label {
+    position: relative;
+    bottom: 2px;
+    color: gold;
+  }
 
-    .eye-icon {
-        position: relative;
-        top: 13px;
-    }
+  .eye-icon {
+    position: relative;
+    top: 13px;
+  }
 }
 
 .validators {
-    color: red;
-    font-size: 18px;
-    font-weight: bolder;
-    text-align: center;
+  color: firebrick;
+  font-size: 18px;
+  font-weight: bolder;
+  text-align: center;
 }
 
-
 .auth-form {
-    width: 100%;
-    text-align: center;
-    padding: 20px;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
 }
 
 .event-item {
-    --padding-top: 20px;
+  --padding-top: 20px;
 
-    ion-avatar {
-        width: 70px;
-        height: 80px;
-        --border-radius: 15px;
+  ion-avatar {
+    width: 70px;
+    height: 80px;
+    --border-radius: 15px;
+  }
+
+  .name {
+    font-weight: 600;
+    padding-bottom: 5px;
+  }
+
+  .data {
+    font-size: 13px;
+
+    strong {
+      font-weight: 500;
     }
+  }
 
-    .name {
-        font-weight: 600;
-        padding-bottom: 5px;
-    }
+  .option-btn {
+    font-size: 27px;
+  }
 
-    .data {
-        font-size: 13px;
-
-        strong {
-            font-weight: 500;
-        }
-    }
-
-    .option-btn {
-        font-size: 27px;
-    }
-
-    ion-chip {
-        font-size: 14px;
-        border-radius: 10px;
-        margin-left: 0;
-    }
+  ion-chip {
+    font-size: 14px;
+    border-radius: 10px;
+    margin-left: 0;
+  }
 }
 @media (min-width: 769px) {
-    .auth-form {
-        width: 500px;
-    }
+  .auth-form {
+    width: 500px;
+  }
 
-    .add-update-modal {
-        --height: 680px;
-    }
+  .add-update-modal {
+    --height: 680px;
+  }
 }
 .scale-up-horizontal-center {
-    animation: scale-up-horizontal-center 0.4s;
-    
-      --background: var(--ion-color-secondary);
-      text-align: center;
-      --border-radius: 15px;
-      ion-label {
-        font-size: 20px;
-        font-family: fantasy;
-      }
-    
+  animation: scale-up-horizontal-center 0.4s;
+
+  --background: var(--ion-color-secondary);
+  text-align: center;
+  --border-radius: 15px;
+  ion-label {
+    font-size: 20px;
+    font-family: fantasy;
   }
-  @keyframes scale-up-horizontal-center {
-    0% {
-      transform: scaleX(0.2);
-    }
-    100% {
-      transform: scaleX(1);
-    }
+}
+@keyframes scale-up-horizontal-center {
+  0% {
+    transform: scaleX(0.2);
   }
-  
+  100% {
+    transform: scaleX(1);
+  }
+}

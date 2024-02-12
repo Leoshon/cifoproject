@@ -1,14 +1,14 @@
-ion-avatar{
+ion-avatar {
   width: 180px;
   height: 180px;
 }
 
-.preview{
-  margin-top:10px;
+.preview {
+  margin-top: 10px;
   display: flex;
   align-items: flex-start;
 }
-.fallback{
+.fallback {
   width: 128px;
   height: 128px;
   border-radius: 50%;
@@ -19,29 +19,28 @@ ion-avatar{
   align-items: center;
   font-weight: 500;
 }
-.nombre{
+.nombre {
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 20px;
   font-weight: 700;
 }
-ion-col{
+ion-col {
   text-align: center;
   margin-bottom: 10px;
   font-weight: bold;
-  .name{
-      font-size: 30px;
-      letter-spacing: 3px;
+  .name {
+    font-size: 30px;
+    letter-spacing: 3px;
   }
-  .points{
-      font-size: 25px;
-      letter-spacing: normal;
-  } 
-  ion-avatar{
+  .points {
+    font-size: 25px;
+    letter-spacing: normal;
+  }
+  ion-avatar {
     width: 8px;
     height: 8px;
   }
-
 }
 .glass-content {
   background: rgba(19, 63, 176, 0.27);
@@ -63,8 +62,6 @@ ion-content {
   --color: white;
 }
 
-
-
 ion-toolbar {
   --background: transparent;
   background: rgba(19, 63, 176, 0.27);
@@ -73,7 +70,6 @@ ion-toolbar {
   -webkit-backdrop-filter: blur(25.3px);
   color: white;
 }
-
 
 ion-card {
   margin: 20px;
@@ -94,7 +90,7 @@ ion-item {
 ion-icon {
   color: yellow;
 }
-ion-button{
-  --color:var(--ion-color-info);
+ion-button {
+  --color: var(--ion-color-info);
   font-size: 20px;
 }

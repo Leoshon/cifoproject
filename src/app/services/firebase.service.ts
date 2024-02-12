@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 import { User } from '../models/user.model';
 import {
   Firestore,
@@ -9,7 +9,14 @@ import {
 } from '@angular/fire/firestore';
 import { Storage, ref } from '@angular/fire/storage';
 import { Photo } from '@capacitor/camera';
-import { addDoc, collection, deleteDoc, query, setDoc, updateDoc } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  query,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
 import { getDownloadURL, uploadString, deleteObject } from 'firebase/storage';
 import { UtilsService } from './utils.service';
 
@@ -27,17 +34,15 @@ export class FireBaseService {
     const ref = collection(this.firestore, 'users');
     return collectionData(ref, { idField: 'uid' });
   }
-   getUserProfile() {
+  getUserProfile() {
     const user = this.auth.currentUser;
     const userDocRef = doc(this.firestore, `users/${user?.uid}`);
-    console.log(user)
     return docData(userDocRef);
-  } 
- async getUserInfo(usuario:User){
-   const userDocRef = doc(this.firestore, `users/${usuario.uid}`);
-   return docData(userDocRef);
-
- }
+  }
+  async getUserInfo(usuario: User) {
+    const userDocRef = doc(this.firestore, `users/${usuario.uid}`);
+    return docData(userDocRef);
+  }
   async uploadImage(photo: Photo) {
     const user = this.auth.currentUser;
     const path = `${user?.uid}/profile.png`;

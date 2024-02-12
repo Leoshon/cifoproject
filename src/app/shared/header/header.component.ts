@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { UtilsService } from 'src/app/services/utils.service';
-import { TranslateModuleService } from 'src/app/services/translate-module.service';
+import { UtilsService } from '../../services/utils.service';
+import { TranslateModuleService } from '../../services/translate-module.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent  implements OnInit {
+export class HeaderComponent implements OnInit {
   @Input() title?: string;
   @Input() backButton!: string;
   @Input() menuButton!: boolean;
@@ -16,8 +16,8 @@ export class HeaderComponent  implements OnInit {
   utilServ = inject(UtilsService);
   translateModuleService = inject(TranslateModuleService);
 
-  constructor() { }
-  closeModal(){
+  constructor() {}
+  closeModal() {
     this.utilServ.dismisModal();
   }
   ngOnInit() {}
@@ -26,5 +26,4 @@ export class HeaderComponent  implements OnInit {
     this.utilServ.saveInLocalStorage('language', this.currentLanguage);
     this.translateModuleService.changeLanguage(this.currentLanguage);
   }
-
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { AddUpdateEventComponent } from 'src/app/components/add-update-event/add-update-event.component';
-import { TrivialComponent } from 'src/app/components/trivial/trivial.component';
-import { User } from 'src/app/models/user.model';
-import { FireBaseService } from 'src/app/services/firebase.service';
-import { FormulaService } from 'src/app/services/formula.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import { TrivialComponent } from '../../../components/trivial/trivial.component';
+import { User } from '../../../models/user.model';
+import { FireBaseService } from '../../../services/firebase.service';
+import { FormulaService } from '../../../services/formula.service';
+import { UtilsService } from '../../../services/utils.service';
 import { TranslateModuleService } from '../../../services/translate-module.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class FormulapagePage implements OnInit {
   formulaService = inject(FormulaService);
   utilService = inject(UtilsService);
   fireService = inject(FireBaseService);
-  translate= inject(TranslateModuleService);
+  translate = inject(TranslateModuleService);
 
   datos: any = null;
   results: any = [];
@@ -29,49 +28,39 @@ export class FormulapagePage implements OnInit {
   ngOnInit() {}
   ionViewWillEnter() {
     this.usuario = this.utilService.getFromLocalStorage('user');
-    console.log(this.usuario.quizPoints);
-    if(this.usuario.quizPoints == 0){
+    if (this.usuario.quizPoints == 0) {
       this.request = false;
       this.goToEvents();
-      console.log(this.request);
-    }else{
+    } else {
       this.request = true;
-      console.log(this.request);
     }
-    
-}
-async goToEvents() {
-  await this.utilService.presentAlert({
-    header: this.translate.get('no_points'),
-    message: this.translate.get('create_event'),
-    mode: 'ios',
-    buttons: [
-      {
-        text: 'Ok',
-        handler: () => {
-        this.utilService.routerNavigate('/main/home');
+  }
+  async goToEvents() {
+    await this.utilService.presentAlert({
+      header: this.translate.get('no_points'),
+      message: this.translate.get('create_event'),
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.utilService.routerNavigate('/main/home');
+          },
         },
-      },
-    ],
-
-  })
-  
-}
-
-  async goToTrivial() {
-    if(this.usuario.quizPoints == 0){
-      this.goToEvents();
-
-    }else{  let success = await this.utilService.presentModal({
-      component: TrivialComponent,
-      componentProps: {
-        usuario: this.usuario,
-      },
+      ],
     });
   }
-    
-  
 
+  async goToTrivial() {
+    if (this.usuario.quizPoints == 0) {
+      this.goToEvents();
+    } else {
+      let success = await this.utilService.presentModal({
+        component: TrivialComponent,
+        componentProps: {
+          usuario: this.usuario,
+        },
+      });
+    }
   }
-
 }

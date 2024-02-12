@@ -38,10 +38,11 @@ export class LoginPage implements OnInit {
     return this.credentials.get('password');
   }
 
-
   ngOnInit() {
     this.currentLanguage = this.utilsService.getFromLocalStorage('language');
-    this.currentLanguage ? this.translateModuleService.changeLanguage(this.currentLanguage) : this.translateModuleService.changeLanguage('ca');
+    this.currentLanguage
+      ? this.translateModuleService.changeLanguage(this.currentLanguage)
+      : this.translateModuleService.changeLanguage('ca');
   }
   async login() {
     const loading = await this.utilsService.loading();
@@ -59,7 +60,8 @@ export class LoginPage implements OnInit {
           icon: 'alert-circle-outline',
           position: 'middle',
         });
-      }).finally(() => {
+      })
+      .finally(() => {
         loading.dismiss();
       });
   }
@@ -72,13 +74,15 @@ export class LoginPage implements OnInit {
         this.utilsService.routerNavigate('/main/home');
         this.credentials.reset();
         this.utilsService.presentToast({
-          message: this.translateModuleService.get('wellcome') + ' ' + user.nombre,
+          message:
+            this.translateModuleService.get('wellcome') + ' ' + user.nombre,
           duration: 2000,
           color: 'primary',
           icon: 'person-circle-outline',
           position: 'middle',
         });
-      }).catch((error) => {
+      })
+      .catch((error) => {
         this.utilsService.presentToast({
           message: error.message,
           duration: 3000,
@@ -86,7 +90,8 @@ export class LoginPage implements OnInit {
           icon: 'alert-circle-outline',
           position: 'middle',
         });
-      }).finally(() => {
+      })
+      .finally(() => {
         loading.dismiss();
       });
   }

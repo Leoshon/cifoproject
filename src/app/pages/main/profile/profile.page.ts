@@ -20,7 +20,7 @@ export class ProfilePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-   console.log (this.user());
+   
   
   }
   ionViewWillEnter() {
@@ -31,7 +31,6 @@ export class ProfilePage implements OnInit {
   }
   async changeImage() {
     const image = await this.utilsServ.changeImage();
-    console.log(image);
     if (image) {
       const loading = await this.utilsServ.loading();
       await loading.present();

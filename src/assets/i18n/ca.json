@@ -37,6 +37,7 @@
     "category": "Categoría",
     "country": "País",
     "price": "Preu",
+    "description": "Descripció",
     "date": "Data",
     "added": "Afegit",
     "won": "Guanyat 10 punts",
@@ -47,14 +48,14 @@
     "sure": "Estàs seguro?",
     "yes": "Sí",
     "no": "No",
+    "send": "Enviar",
     "no_comments": "No hi ha comentaris",
+    "no_events": "No hi ha esdeveniments",
     "quiz_points": "Punts del Quiz",
     "go_quiz": "Anar al Quiz",
     "req_question": "Següent pregunta",
     "time": "Temps",
     "no_points": "No tens punts...",
-    "create_event": "Crear esdeveniment para obtenir punts"
-
-    
+    "create_event": "Crear esdeveniment para obtenir punts",
+    "more_info": "Veure més "
 }
-

@@ -37,6 +37,7 @@
     "category": "Categoría",
     "country": "País",
     "price": "Precio",
+    "description": "Descripción",
     "date": "Fecha",
     "added": "Añadido",
     "won": "Has ganado 10 puntos",
@@ -47,13 +48,16 @@
     "sure": "¿Estás seguro?",
     "yes": "Sí",
     "no": "No",
+    "send": "Enviar",
     "no_comment": "No hay comentarios",
+    "no_events": "No hay eventos",
     "quiz_points": "Puntos del Quiz",
     "go_quiz": "Ir al Quiz",
     "req_question": "Siguiente pregunta",
     "time": "Tiempo",
     "no_points": "No tienes suficientes puntos...",
-    "create_event": "Crear evento para ganar 10 puntos"
+    "create_event": "Crear evento para ganar 10 puntos",
+    "more_info": "Ver más"
 }
 
 

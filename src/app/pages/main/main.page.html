@@ -3,8 +3,12 @@
   <ion-content class="ion-text-center">
     <ion-avatar>
       <img *ngIf="user().imageUrl" [src]="user().imageUrl" />
-    <ion-icon *ngIf="!user().imageUrl" name="person-circle-outline" class="empty-icon">
-  </ion-icon>
+      <ion-icon
+        *ngIf="!user().imageUrl"
+        name="person-circle-outline"
+        class="empty-icon"
+      >
+      </ion-icon>
     </ion-avatar>
     <h4>{{user().nombre}}</h4>
     <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
@@ -25,7 +29,7 @@
         <ion-icon slot="start" name="log-out-outline"></ion-icon>
         <ion-label>{{"logout" | translate}}</ion-label>
       </ion-item>
-  </ion-menu-toggle>
+    </ion-menu-toggle>
   </ion-footer>
 </ion-menu>
 <ion-router-outlet id="menu-content" main></ion-router-outlet>

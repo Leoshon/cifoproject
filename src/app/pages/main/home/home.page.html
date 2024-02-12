@@ -1,47 +1,55 @@
 <app-header title="Mis Eventos" [menuButton]="true"></app-header>
 
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="doRefresh($event)"
+    pullFactor="0.8"
+    pullMin="60"
+    pullMax="120"
+  >
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  
+
   <ion-list *ngIf="!loading">
     <ion-item-sliding class="event-item" *ngFor="let e of events">
-      
       <ion-item class="ion-text-center">
         <ion-avatar>
           <img [src]="e.image" />
         </ion-avatar>
         <ion-label>
-          <div class="name"><strong>{{"category" | translate}}: </strong>{{e.categoria}}</div>
+          <div class="name">
+            <strong>{{"category" | translate}}: </strong>{{e.categoria}}
+          </div>
           <div class="data">
             <p><strong>{{"country" | translate }}: </strong>{{e.pais}}</p>
-            <p><strong>{{"description" | translate }}: </strong>{{e.descripcion}}</p>
-            <p><strong>{{"price" | translate }}: </strong>{{e.precio}}</p>
+            <p>
+              <strong>{{"description" | translate }}: </strong>{{e.descripcion}}
+            </p>
           </div>
         </ion-label>
-        
+
         <ion-button
-        expand="block"
-        fill="outline"
-        shape="round"
-        slot="end"
-        (click)="callModal(e.id)"
-      >
-        {{ "see_comment" | translate }}
-      </ion-button>
+          expand="block"
+          fill="outline"
+          shape="round"
+          slot="end"
+          (click)="callModal(e.id)"
+        >
+          {{ "see_comment" | translate }}
+        </ion-button>
       </ion-item>
-      
-      <ion-icon  name="arrow-back" slot="end"></ion-icon>
+
+      <ion-icon name="arrow-back" slot="end"></ion-icon>
       <ion-item-options side="end">
         <ion-item-option color="primary" (click)="addUpdateEvent(e)" expandable>
           <ion-icon class="option-btn" name="create-outline"></ion-icon>
         </ion-item-option>
         <ion-item-option color="danger" expandable>
           <ion-icon
-          class="option-btn"
-          name="trash-outline"
-          (click)="confirmDelete(e)"
+            class="option-btn"
+            name="trash-outline"
+            (click)="confirmDelete(e)"
           ></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -64,7 +72,7 @@
   </ion-list>
   <div *ngIf="!loading && !events.length" class="empty">
     <ion-icon name="sad-outline"></ion-icon>
-    <p>No hay eventos</p>
+    <p>{{"no_events" | translate }}</p>
   </div>
   <div class="d-flex-center">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

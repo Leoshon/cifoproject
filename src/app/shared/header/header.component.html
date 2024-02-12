@@ -1,25 +1,28 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
-        <ion-menu-button *ngIf="menuButton" menu="menu-content"></ion-menu-button>
-        <ion-button *ngIf="isModal" (click)="closeModal()">
-          <ion-icon name="close-circle-outline" ></ion-icon>
-        </ion-button>
-      </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button
+        *ngIf="backButton"
+        [defaultHref]="backButton"
+      ></ion-back-button>
+      <ion-menu-button *ngIf="menuButton" menu="menu-content"></ion-menu-button>
+      <ion-button *ngIf="isModal" (click)="closeModal()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
       <div class="usuario">E V E N T B O O K</div>
     </ion-title>
   </ion-toolbar>
   <ion-item *ngIf="!isModal">
     <ion-select
-label='{{ "language" | translate }}'
-(ionChange)="changeLanguage($event)"
-[value]="currentLanguage"
->
-  <ion-select-option value="es">Español</ion-select-option>
-  <ion-select-option value="en">English</ion-select-option>
-  <ion-select-option value="ca">Catalá</ion-select-option>
-</ion-select>
-</ion-item>
+      label="{{ 'language' | translate }}"
+      (ionChange)="changeLanguage($event)"
+      [value]="currentLanguage"
+    >
+      <ion-select-option value="es">Español</ion-select-option>
+      <ion-select-option value="en">English</ion-select-option>
+      <ion-select-option value="ca">Catalá</ion-select-option>
+    </ion-select>
+  </ion-item>
 </ion-header>

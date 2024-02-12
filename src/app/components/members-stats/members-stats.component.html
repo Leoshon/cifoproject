@@ -10,11 +10,16 @@
             </ion-avatar>
           </ion-col>
           <ion-col class="ion-padding" size="12">
-            <div class="name">Categoria: {{ e.categoria }}</div>
+            <div class="name">{{"category" | translate}}: {{ e.categoria }}</div>
           </ion-col>
           <ion-col class="ion-padding" size="12">
             <div>
-              Descripcion: <strong>{{ e.descripcion }}</strong>
+              {{"description" | translate}}: <strong>{{ e.descripcion }}</strong>
+            </div>
+          </ion-col>
+          <ion-col class="ion-padding" size="12">
+            <div>
+              {{"country" | translate}}: <strong>{{ e.pais }}</strong>
             </div>
           </ion-col>
           <ion-col class="ion-padding" size="12">
@@ -23,7 +28,7 @@
               expand="block"
               shape="round"
             >
-              Ver Comentarios
+              {{ "see_comment" | translate }} 
             </ion-button>
           </ion-col>
           <ion-col size="12">
@@ -32,7 +37,7 @@
                 <ion-textarea
                   type="text"
                   formControlName="comment"
-                  label="Comentario"
+                  [label]="translate.get('add_comment')"
                   label-placement="floating"
                 ></ion-textarea>
                
@@ -44,7 +49,7 @@
                 (click)="sendComment(e.id)"
                 [disabled]="!eventForm.valid"
               >
-                Enviar
+                {{ "send" | translate }}
               </ion-button>
             </form>
           </ion-col>
@@ -55,6 +60,6 @@
 </ion-content>
 <ion-content *ngIf="events.length===0">
   <ion-item class="scale-up-horizontal-center">
-    <ion-label >No hay eventos</ion-label>
+    <ion-label >{{"no_events" | translate }}</ion-label>
   </ion-item>
 </ion-content>

@@ -1,7 +1,7 @@
 {
     "home": "Home",
     "access_denied": "User name or password is incorrect",
-    "name": "Name", 
+    "name": "Name",
     "others": "Others",
     "wellcome": "Wellcome",
     "profile": "Profile",
@@ -37,6 +37,7 @@
     "category": "Category",
     "country": "Country",
     "price": "Price",
+    "description": "Description",
     "date": "Date",
     "added": "Added",
     "won": "You won 10 points",
@@ -47,12 +48,14 @@
     "sure": "Are you sure?",
     "yes": "Yes",
     "no": "No",
+    "send": "Send",
     "no_comments": "No comments",
+    "no_events": "No events",
     "quiz_points": "Quiz points",
     "go_quiz": "Go to quiz",
     "req_question": "Request a question",
     "time": "Time left",
     "no_points": "You don't have enough points...",
-    "create_event": "Create event to get 10 points"
-    
+    "create_event": "Create event to get 10 points",
+    "more_info": "More info"
 }
